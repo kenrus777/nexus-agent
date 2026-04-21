@@ -33,7 +33,7 @@ body{background:#0f0e17;min-height:100vh;display:flex;flex-direction:column;alig
 #btn-undo{background:#1e293b;color:#94a3b8;border:1px solid #334155;}
 #btn-bomb{background:#1a1a2e;color:#a78bfa;border:1px solid #4c1d95;}
 #btn-shuffle{background:#1a2e1a;color:#34d399;border:1px solid #064e3b;}
-#btn-hub{background:#1a2030;color:#60a5fa;border:1px solid #1e3a5f;}
+#btn-shop{background:#2e1a0f;color:#fbbf24;border:1px solid #78350f;}
 .power-cost{font-size:0.6rem;opacity:0.7;}
 #msg-overlay{position:fixed;inset:0;background:rgba(0,0,0,0);display:flex;align-items:center;justify-content:center;z-index:200;pointer-events:none;transition:background .3s;}
 #msg-overlay.show{background:rgba(0,0,0,0.85);pointer-events:all;}
@@ -61,6 +61,8 @@ body{background:#0f0e17;min-height:100vh;display:flex;flex-direction:column;alig
 .close-shop:hover{color:#fff;border-color:#fff;}
 #floaters{position:fixed;inset:0;pointer-events:none;z-index:400;}
 #combo-banner{position:fixed;top:20%;left:50%;transform:translateX(-50%);font-size:2rem;font-weight:900;pointer-events:none;z-index:401;opacity:0;text-align:center;}
+#back-btn{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);background:#1e1b2e;border:1px solid #374151;color:#6b7280;padding:6px 20px;border-radius:8px;cursor:pointer;font-family:'Nunito',sans-serif;font-size:0.75rem;z-index:100;text-decoration:none;}
+#back-btn:hover{color:#fff;border-color:#fff;}
 </style>
 </head>
 <body>
@@ -73,14 +75,12 @@ body{background:#0f0e17;min-height:100vh;display:flex;flex-direction:column;alig
   <div id="coin-display">🪙 <span id="coinAmt">0</span> coins</div>
   <div id="controls-hint">← → ↑ ↓ or swipe</div>
 </div>
-<div id="board-wrap">
-  <div id="board"></div>
-</div>
+<div id="board-wrap"><div id="board"></div></div>
 <div id="power-bar">
   <button class="power-btn" id="btn-undo" onclick="undoMove()"><span class="icon">↩️</span>UNDO<span class="power-cost">Free</span></button>
   <button class="power-btn" id="btn-bomb" onclick="useBomb()"><span class="icon">💣</span>BOMB<span class="power-cost">30🪙</span></button>
   <button class="power-btn" id="btn-shuffle" onclick="useShuffle()"><span class="icon">🔀</span>SHUFFLE<span class="power-cost">50🪙</span></button>
-  <button class="power-btn" id="btn-hub" onclick="window.location='../../games/'"><span class="icon">🎮</span>ALL GAMES<span class="power-cost">hub</span></button>
+  <button class="power-btn" id="btn-shop" onclick="openShop()"><span class="icon">🛒</span>SHOP<span class="power-cost">coins</span></button>
 </div>
 <div id="msg-overlay">
   <div id="msg-box">
@@ -107,6 +107,7 @@ body{background:#0f0e17;min-height:100vh;display:flex;flex-direction:column;alig
 </div>
 <div id="floaters"></div>
 <div id="combo-banner"></div>
+<a href="../" id="back-btn">← All Games</a>
 <script>
 const TILE_STYLES={2:{bg:'#eee4da',color:'#776e65'},4:{bg:'#ede0c8',color:'#776e65'},8:{bg:'#f2b179',color:'#fff'},16:{bg:'#f59563',color:'#fff'},32:{bg:'#f67c5f',color:'#fff'},64:{bg:'#f65e3b',color:'#fff'},128:{bg:'#edcf72',color:'#fff',glow:'#edcf72'},256:{bg:'#edcc61',color:'#fff',glow:'#edcc61'},512:{bg:'#edc850',color:'#fff',glow:'#edc850'},1024:{bg:'#a78bfa',color:'#fff',glow:'#a78bfa'},2048:{bg:'#f59e0b',color:'#fff',glow:'#f59e0b'},4096:{bg:'#ef4444',color:'#fff',glow:'#ef4444'},8192:{bg:'#10b981',color:'#fff',glow:'#10b981'}};
 const SIZE=4;let board=[],prevBoard=[],score=0,prevScore=0;
@@ -118,26 +119,26 @@ function buyCoins(a,n){updateCoins(a);closeShop();floater(`${n} Pack! +${a} 🪙
 function openShop(){document.getElementById('shop-modal').classList.add('open');}
 function closeShop(){document.getElementById('shop-modal').classList.remove('open');}
 function floater(text,color='#fff',big=false){const el=document.createElement('div');el.textContent=text;el.style.cssText=`position:absolute;left:50%;top:${30+Math.random()*20}%;transform:translateX(-50%);color:${color};font-size:${big?'1.8':'1.1'}rem;font-weight:900;font-family:'Nunito',sans-serif;text-shadow:0 0 10px ${color};white-space:nowrap;`;document.getElementById('floaters').appendChild(el);let op=1;const iv=setInterval(()=>{op-=0.025;el.style.opacity=op;el.style.top=`${parseFloat(el.style.top)-0.3}%`;if(op<=0){clearInterval(iv);el.remove();}},20);}
-function showCombo(n){const el=document.getElementById('combo-banner');const colors=['#fbbf24','#f59e0b','#ef4444','#a855f7','#10b981'];el.textContent=n>=3?`🔥 ${n}x COMBO!`:`⚡ COMBO x${n}`;el.style.color=colors[Math.min(n-1,colors.length-1)];el.style.textShadow=`0 0 20px ${colors[Math.min(n-1,colors.length-1)]}`;el.style.opacity='1';clearTimeout(comboTimer);comboTimer=setTimeout(()=>{el.style.opacity='0';},900);}
-function initBoard(){const wrap=document.getElementById('board-wrap');const w=Math.min(wrap.clientWidth-24,420-24);tileSize=Math.floor((w-pad*2-gap*3)/4);const b=document.getElementById('board');b.style.width=b.style.height=`${w}px`;b.innerHTML='';for(let i=0;i<16;i++){const c=document.createElement('div');c.className='cell';b.appendChild(c);}board=Array.from({length:SIZE},()=>Array(SIZE).fill(0));addRandomTile();addRandomTile();renderBoard();}
+function showCombo(n){const el=document.getElementById('combo-banner');const colors=['#fbbf24','#f59e0b','#ef4444','#a855f7','#10b981'];el.textContent=n>=3?`🔥 ${n}x COMBO!`:`⚡ COMBO x${n}`;el.style.color=colors[Math.min(n-1,colors.length-1)];el.style.opacity='1';clearTimeout(comboTimer);comboTimer=setTimeout(()=>{el.style.opacity='0';},900);}
+function initBoard(){const wrap=document.getElementById('board-wrap');const w=Math.min(wrap.clientWidth-24,396);tileSize=Math.floor((w-pad*2-gap*3)/4);const boardEl=document.getElementById('board');boardEl.style.width=boardEl.style.height=`${w}px`;boardEl.innerHTML='';for(let i=0;i<16;i++){const c=document.createElement('div');c.className='cell';boardEl.appendChild(c);}board=Array.from({length:SIZE},()=>Array(SIZE).fill(0));addRandomTile();addRandomTile();renderBoard();}
 function newGame(){hideMsg();undoUsed=false;comboCount=0;score=0;prevBoard=null;updateScore(0);board=Array.from({length:SIZE},()=>Array(SIZE).fill(0));addRandomTile();addRandomTile();renderBoard();}
-function addRandomTile(){const e=[];for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++)if(!board[r][c])e.push([r,c]);if(!e.length)return false;const[r,c]=e[Math.floor(Math.random()*e.length)];board[r][c]=Math.random()<0.85?2:4;return true;}
+function addRandomTile(){const empty=[];for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++)if(!board[r][c])empty.push([r,c]);if(!empty.length)return false;const[r,c]=empty[Math.floor(Math.random()*empty.length)];board[r][c]=Math.random()<0.85?2:4;return true;}
 function getTilePos(r,c){return{x:pad+c*(tileSize+gap),y:pad+r*(tileSize+gap)};}
-function renderBoard(){const b=document.getElementById('board');b.querySelectorAll('.tile').forEach(t=>t.remove());for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++){const val=board[r][c];if(!val)continue;const tile=document.createElement('div');tile.className='tile';const{x,y}=getTilePos(r,c);const s=TILE_STYLES[val]||{bg:'#3b0764',color:'#fff',glow:'#7c3aed'};tile.style.cssText=`left:${x}px;top:${y}px;width:${tileSize}px;height:${tileSize}px;background:${s.bg};color:${s.color};font-size:${val>=1024?tileSize*0.28:tileSize*0.36}px;${s.glow?`box-shadow:0 0 16px ${s.glow}60;`:''}`;tile.textContent=val;tile.classList.add('new');b.appendChild(tile);}}
+function renderBoard(){const boardEl=document.getElementById('board');boardEl.querySelectorAll('.tile').forEach(t=>t.remove());for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++){const val=board[r][c];if(!val)continue;const tile=document.createElement('div');tile.className='tile';const{x,y}=getTilePos(r,c);const s=TILE_STYLES[val]||{bg:'#3b0764',color:'#fff',glow:'#7c3aed'};tile.style.cssText=`left:${x}px;top:${y}px;width:${tileSize}px;height:${tileSize}px;background:${s.bg};color:${s.color};font-size:${val>=1024?tileSize*0.28:tileSize*0.36}px;${s.glow?`box-shadow:0 0 16px ${s.glow}60;`:''}`;tile.textContent=val;boardEl.appendChild(tile);}}
 function updateScore(s){score=s;document.getElementById('score').textContent=score;if(score>highScore){highScore=score;localStorage.setItem('mr_hs',highScore);document.getElementById('best').textContent=highScore;}}
 function compress(row){const f=row.filter(v=>v!==0);while(f.length<SIZE)f.push(0);return f;}
 function mergeRow(row){let pts=0,merged=false;for(let i=0;i<SIZE-1;i++){if(row[i]&&row[i]===row[i+1]){row[i]*=2;pts+=row[i];row[i+1]=0;merged=true;}}return{row,pts,merged};}
-function moveLeft(){let totalPts=0,anyMoved=false,merges=0;for(let r=0;r<SIZE;r++){let row=compress(board[r]);const{row:m,pts,merged:d}=mergeRow(row);row=compress(m);if(row.join()!==board[r].join())anyMoved=true;if(d)merges++;totalPts+=pts;board[r]=row;}return{anyMoved,totalPts,merges};}
+function moveLeft(){let totalPts=0,anyMoved=false,merges=0;for(let r=0;r<SIZE;r++){let row=compress(board[r]);const{row:m,pts,merged}=mergeRow(row);row=compress(m);if(row.join()!==board[r].join())anyMoved=true;if(merged)merges++;totalPts+=pts;board[r]=row;}return{anyMoved,totalPts,merges};}
 function rotateRight(){const n=Array.from({length:SIZE},()=>Array(SIZE).fill(0));for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++)n[c][SIZE-1-r]=board[r][c];board=n;}
 function rotateLeft(){rotateRight();rotateRight();rotateRight();}
-function move(dir){prevBoard=board.map(r=>[...r]);prevScore=score;undoUsed=false;let result;if(dir==='left')result=moveLeft();else if(dir==='right'){rotateRight();rotateRight();result=moveLeft();rotateRight();rotateRight();}else if(dir==='up'){rotateLeft();result=moveLeft();rotateRight();}else{rotateRight();result=moveLeft();rotateLeft();}if(!result.anyMoved&&!result.totalPts)return;if(result.merges>0){comboCount++;if(comboCount>=2)showCombo(comboCount);updateCoins(result.merges*2);}else{comboCount=0;}updateScore(score+result.totalPts);if(result.totalPts>=2048)floater('🏆 LEGENDARY! +'+result.totalPts,'#f59e0b',true);else if(result.totalPts>=512)floater('🔥 AMAZING! +'+result.totalPts,'#ef4444',true);else if(result.totalPts>=128)floater('⚡ +'+result.totalPts,'#a78bfa');const added=addRandomTile();renderBoard();if(!added||!canMove())setTimeout(()=>showMsg('😵 NO MORE MOVES!',`Score: ${score} | Best: ${highScore}`),300);}
+function move(dir){prevBoard=board.map(r=>[...r]);prevScore=score;undoUsed=false;let result;if(dir==='left')result=moveLeft();else if(dir==='right'){rotateRight();rotateRight();result=moveLeft();rotateRight();rotateRight();}else if(dir==='up'){rotateLeft();result=moveLeft();rotateRight();}else{rotateRight();result=moveLeft();rotateLeft();}if(!result.anyMoved&&!result.totalPts)return;if(result.merges>0){comboCount++;if(comboCount>=2)showCombo(comboCount);updateCoins(result.merges*2);}else comboCount=0;updateScore(score+result.totalPts);if(result.totalPts>=2048)floater('🏆 LEGENDARY! +'+result.totalPts,'#f59e0b',true);else if(result.totalPts>=512)floater('🔥 AMAZING! +'+result.totalPts,'#ef4444',true);else if(result.totalPts>=128)floater('⚡ +'+result.totalPts,'#a78bfa');const added=addRandomTile();renderBoard();if(!added||!canMove())setTimeout(()=>showMsg('😵 NO MORE MOVES!',`Score: ${score} | Best: ${highScore}`),300);}
 function canMove(){for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++){if(!board[r][c])return true;if(c<SIZE-1&&board[r][c]===board[r][c+1])return true;if(r<SIZE-1&&board[r][c]===board[r+1][c])return true;}return false;}
 function undoMove(){if(undoUsed||!prevBoard){floater('No undo!','#ef4444');return;}board=prevBoard.map(r=>[...r]);updateScore(prevScore);undoUsed=true;renderBoard();floater('↩️ Undone!','#94a3b8');}
 function useBomb(){if(coins<30){floater('Need 30 🪙!','#ef4444');openShop();return;}let minVal=Infinity,minR=-1,minC=-1;for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++){if(board[r][c]&&board[r][c]<minVal){minVal=board[r][c];minR=r;minC=c;}}if(minR>=0){board[minR][minC]=0;updateCoins(-30);renderBoard();floater(`💣 Removed ${minVal}!`,'#a78bfa');}}
 function useShuffle(fromGameOver=false){if(coins<50){floater('Need 50 🪙!','#ef4444');openShop();return;}const vals=[];for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++)if(board[r][c])vals.push(board[r][c]);for(let i=vals.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[vals[i],vals[j]]=[vals[j],vals[i]];}let idx=0;for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++){board[r][c]=vals[idx]||0;idx++;}updateCoins(-50);if(fromGameOver)hideMsg();renderBoard();floater('🔀 Shuffled!','#34d399');}
 function showMsg(title,sub){document.getElementById('msg-title').textContent=title;document.getElementById('msg-sub').textContent=sub;document.getElementById('msg-overlay').classList.add('show');}
 function hideMsg(){document.getElementById('msg-overlay').classList.remove('show');}
-document.addEventListener('keydown',e=>{const m={ArrowLeft:'left',ArrowRight:'right',ArrowUp:'up',ArrowDown:'down',a:'left',d:'right',w:'up',s:'down'};if(m[e.key]){e.preventDefault();move(m[e.key]);}});
+document.addEventListener('keydown',e=>{const map={ArrowLeft:'left',ArrowRight:'right',ArrowUp:'up',ArrowDown:'down',a:'left',d:'right',w:'up',s:'down'};if(map[e.key]){e.preventDefault();move(map[e.key]);}});
 let sx=0,sy=0;
 document.getElementById('board').addEventListener('touchstart',e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY;},{passive:true});
 document.getElementById('board').addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx;const dy=e.changedTouches[0].clientY-sy;if(Math.abs(dx)<20&&Math.abs(dy)<20)return;if(Math.abs(dx)>Math.abs(dy))move(dx>0?'right':'left');else move(dy>0?'down':'up');},{passive:true});
