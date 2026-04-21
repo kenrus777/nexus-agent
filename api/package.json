@@ -1,0 +1,1 @@
+{\n  \"name\": \"nexus-api\",\n  \"version\": \"1.0.0\",\n  \"type\": \"module\",\n  \"scripts\": { \"start\": \"node server.js\" },\n  \"engines\": { \"node\": \">=20.0.0\" },\n  \"dependencies\": {\n    \"@supabase/supabase-js\": \"^2.39.0\",\n    \"express\": \"^4.18.2\",\n    \"stripe\": \"^14.0.0\"\n  }\n}\n
