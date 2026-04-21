@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXUS GAMES — All Games</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a0a14;min-height:100vh;font-family:'Nunito',sans-serif;color:#fff;padding:24px 16px;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,245,196,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,245,196,0.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;}
+header{text-align:center;margin-bottom:40px;}
+.logo{font-family:'Space Mono',monospace;font-size:1rem;color:#00f5c4;letter-spacing:6px;margin-bottom:8px;}
+h1{font-size:2.2rem;font-weight:900;background:linear-gradient(135deg,#fff,#00f5c4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.sub{color:#4b5563;font-size:0.85rem;margin-top:6px;letter-spacing:2px;}
+.section-title{font-family:'Space Mono',monospace;font-size:0.7rem;color:#4b5563;letter-spacing:4px;text-transform:uppercase;margin-bottom:16px;padding-left:4px;}
+.games-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;max-width:900px;margin:0 auto 40px;}
+.game-card{background:#111122;border:1px solid #1e2040;border-radius:16px;overflow:hidden;transition:all 0.2s;text-decoration:none;display:block;}
+.game-card:hover{transform:translateY(-4px);border-color:#00f5c4;box-shadow:0 8px 30px rgba(0,245,196,0.15);}
+.game-thumb{height:140px;display:flex;align-items:center;justify-content:center;font-size:4rem;position:relative;overflow:hidden;}
+.game-thumb.merge{background:linear-gradient(135deg,#0f0e17,#1a1828);}
+.game-thumb.coming{background:linear-gradient(135deg,#0a0a14,#111122);opacity:0.5;}
+.game-info{padding:16px;}
+.game-name{font-size:1.1rem;font-weight:900;margin-bottom:4px;}
+.game-desc{font-size:0.78rem;color:#6b7280;margin-bottom:12px;line-height:1.4;}
+.game-tags{display:flex;gap:6px;flex-wrap:wrap;}
+.tag{font-size:0.6rem;font-family:'Space Mono',monospace;padding:3px 8px;border-radius:10px;letter-spacing:1px;}
+.tag-green{background:rgba(0,245,196,0.1);color:#00f5c4;border:1px solid rgba(0,245,196,0.2);}
+.tag-purple{background:rgba(124,58,237,0.1);color:#a78bfa;border:1px solid rgba(124,58,237,0.2);}
+.tag-amber{background:rgba(245,158,11,0.1);color:#fbbf24;border:1px solid rgba(245,158,11,0.2);}
+.tag-gray{background:rgba(100,116,139,0.1);color:#64748b;border:1px solid rgba(100,116,139,0.2);}
+.play-btn{display:inline-block;margin-top:12px;background:#00f5c4;color:#0a0a14;padding:7px 20px;border-radius:8px;font-weight:900;font-size:0.82rem;transition:all 0.2s;}
+.play-btn:hover{background:#00ddb0;}
+.coming-soon{display:inline-block;margin-top:12px;background:transparent;color:#374151;padding:7px 20px;border-radius:8px;font-weight:700;font-size:0.82rem;border:1px solid #1e2040;}
+.slot-card{background:#0d0d1f;border:1px dashed #1e2040;border-radius:16px;padding:28px;text-align:center;color:#374151;}
+.slot-icon{font-size:2.5rem;margin-bottom:8px;}
+.slot-label{font-size:0.75rem;font-family:'Space Mono',monospace;letter-spacing:2px;}
+footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #1e2040;}
+.footer-text{font-family:'Space Mono',monospace;font-size:0.65rem;color:#374151;letter-spacing:2px;}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">NEXUS // GAMES</div>
+  <h1>Game Hub</h1>
+  <div class="sub">ALL GAMES · FREE TO PLAY · COINS SYSTEM</div>
+</header>
+
+<div style="max-width:900px;margin:0 auto;">
+
+  <div class="section-title">🎮 Live Games</div>
+  <div class="games-grid">
+
+    <!-- MERGE RUSH -->
+    <a href="merge-rush/" class="game-card">
+      <div class="game-thumb merge">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:16px;">
+          <div style="background:#f2b179;border-radius:6px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:0.9rem;">8</div>
+          <div style="background:#a78bfa;border-radius:6px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:0.75rem;">1024</div>
+          <div style="background:#edcf72;border-radius:6px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:0.85rem;">128</div>
+          <div style="background:#f59e0b;border-radius:6px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:0.75rem;">2048</div>
+        </div>
+      </div>
+      <div class="game-info">
+        <div class="game-name">MERGE RUSH</div>
+        <div class="game-desc">Swipe to merge tiles and reach 2048. Chain combos, use power-ups, earn coins every merge.</div>
+        <div class="game-tags">
+          <span class="tag tag-green">LIVE</span>
+          <span class="tag tag-purple">PUZZLE</span>
+          <span class="tag tag-amber">🪙 IAP</span>
+        </div>
+        <div class="play-btn">▶ PLAY NOW</div>
+      </div>
+    </a>
+
+    <!-- SLOT 2 — COMING SOON -->
+    <div class="game-card" style="cursor:default;">
+      <div class="game-thumb coming">❓</div>
+      <div class="game-info">
+        <div class="game-name" style="color:#374151;">Next Game</div>
+        <div class="game-desc">A brand new addictive game is coming soon. Stay tuned!</div>
+        <div class="game-tags">
+          <span class="tag tag-gray">COMING SOON</span>
+        </div>
+        <div class="coming-soon">🔒 Coming Soon</div>
+      </div>
+    </div>
+
+    <!-- SLOT 3 — COMING SOON -->
+    <div class="game-card" style="cursor:default;">
+      <div class="game-thumb coming">🚧</div>
+      <div class="game-info">
+        <div class="game-name" style="color:#374151;">Game #3</div>
+        <div class="game-desc">In development. Drop by again soon!</div>
+        <div class="game-tags">
+          <span class="tag tag-gray">IN DEV</span>
+        </div>
+        <div class="coming-soon">🔒 Coming Soon</div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-text">NEXUS GAME STUDIO · KENRUS777 · BUILT WITH AI</div>
+</footer>
+</body>
+</html>
