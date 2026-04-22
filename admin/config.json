@@ -1,7 +1,7 @@
 {
   "profile": {
     "name": "kenrus777",
-    "title": "Software Engineer Â· AI/ML Developer Â· Game Builder",
+    "title": "Software Engineer ÃÂ· AI/ML Developer ÃÂ· Game Builder",
     "bio": "15+ years .NET development. Now building AI agents, web games, and quant trading tools.",
     "avatar": "",
     "location": "Singapore",
@@ -12,22 +12,22 @@
   "sections": {
     "games": {
       "visible": true,
-      "label": "ð® Games",
+      "label": "Ã°ÂÂÂ® Games",
       "description": "Browser games with coin IAP system"
     },
     "ai_projects": {
       "visible": true,
-      "label": "ð¤ AI Projects",
+      "label": "Ã°ÂÂ¤Â AI Projects",
       "description": "AI/ML engineering projects"
     },
     "quant": {
       "visible": true,
-      "label": "ð Quant & Indicators",
+      "label": "Ã°ÂÂÂ Quant & Indicators",
       "description": "Trading indicators and quantitative analysis"
     },
     "nexus": {
       "visible": false,
-      "label": "â¡ NEXUS Agent",
+      "label": "Ã¢ÂÂ¡ NEXUS Agent",
       "description": "AI automation hub"
     }
   },
@@ -43,21 +43,21 @@
         "Combos",
         "IAP"
       ],
-      "emoji": "ð¢",
+      "emoji": "Ã°ÂÂÂ¢",
       "status": "live"
     },
     {
       "id": "stickman-dash",
       "visible": true,
       "name": "STICKMAN DASH",
-      "desc": "Endless runner with combat â jump, kick, survive",
+      "desc": "Endless runner with combat Ã¢ÂÂ jump, kick, survive",
       "url": "games/stickman-dash/",
       "tags": [
         "Runner",
         "Combat",
         "IAP"
       ],
-      "emoji": "ð",
+      "emoji": "Ã°ÂÂÂ",
       "status": "live"
     }
   ],
@@ -73,7 +73,7 @@
         "Anthropic",
         "GitHub Actions"
       ],
-      "emoji": "â¡",
+      "emoji": "Ã¢ÂÂ¡",
       "status": "live"
     },
     {
@@ -87,7 +87,7 @@
         "ML",
         "Finance"
       ],
-      "emoji": "ð§ ",
+      "emoji": "Ã°ÂÂ§Â ",
       "status": "live"
     }
   ],
@@ -103,8 +103,11 @@
         "MT5",
         "Price Action"
       ],
-      "emoji": "ð",
+      "emoji": "Ã°ÂÂÂ",
       "status": "private"
     }
-  ]
+  ],
+  "admin": {
+    "pin": "0987"
+  }
 }
