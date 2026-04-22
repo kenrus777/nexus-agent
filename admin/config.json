@@ -1,0 +1,90 @@
+{
+  "profile": {
+    "name": "kenrus777",
+    "title": "Software Engineer · AI/ML Developer · Game Builder",
+    "bio": "15+ years .NET development. Now building AI agents, web games, and quant trading tools.",
+    "avatar": "",
+    "location": "Singapore",
+    "email": "",
+    "github": "https://github.com/kenrus777",
+    "linkedin": ""
+  },
+  "sections": {
+    "games": {
+      "visible": true,
+      "label": "🎮 Games",
+      "description": "Browser games with coin IAP system"
+    },
+    "ai_projects": {
+      "visible": true,
+      "label": "🤖 AI Projects",
+      "description": "AI/ML engineering projects"
+    },
+    "quant": {
+      "visible": true,
+      "label": "📈 Quant & Indicators",
+      "description": "Trading indicators and quantitative analysis"
+    },
+    "nexus": {
+      "visible": false,
+      "label": "⚡ NEXUS Agent",
+      "description": "AI automation hub"
+    }
+  },
+  "games": [
+    {
+      "id": "merge-rush",
+      "visible": true,
+      "name": "MERGE RUSH",
+      "desc": "Addictive 2048-style merge puzzle with combos and power-ups",
+      "url": "games/merge-rush/",
+      "tags": ["Puzzle", "Combos", "IAP"],
+      "emoji": "🔢",
+      "status": "live"
+    },
+    {
+      "id": "stickman-dash",
+      "visible": true,
+      "name": "STICKMAN DASH",
+      "desc": "Endless runner with combat — jump, kick, survive",
+      "url": "games/stickman-dash/",
+      "tags": ["Runner", "Combat", "IAP"],
+      "emoji": "🏃",
+      "status": "live"
+    }
+  ],
+  "ai_projects": [
+    {
+      "id": "nexus-agent",
+      "visible": true,
+      "name": "NEXUS AI Agent Hub",
+      "desc": "Autonomous agent for social media, game deploy, and IAP",
+      "url": "https://github.com/kenrus777/nexus-agent",
+      "tags": ["Node.js", "Anthropic", "GitHub Actions"],
+      "emoji": "⚡",
+      "status": "live"
+    },
+    {
+      "id": "pyohlcpred",
+      "visible": true,
+      "name": "pyOHLCpred",
+      "desc": "OHLC price prediction using ML models",
+      "url": "https://github.com/kenrus777/pyOHLCpred",
+      "tags": ["Python", "ML", "Finance"],
+      "emoji": "🧠",
+      "status": "live"
+    }
+  ],
+  "quant": [
+    {
+      "id": "pa-reversal",
+      "visible": true,
+      "name": "PA Reversal M1",
+      "desc": "MQL5 indicator detecting 4 price action reversal patterns on 1-min chart",
+      "url": "",
+      "tags": ["MQL5", "MT5", "Price Action"],
+      "emoji": "📊",
+      "status": "private"
+    }
+  ]
+}

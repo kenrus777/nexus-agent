@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXUS Admin Panel</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#07080d;color:#e2e8f0;font-family:'Syne',sans-serif;min-height:100vh;}
+header{background:#0d0f1a;border-bottom:1px solid #1e2340;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:'Space Mono',monospace;font-size:1rem;color:#00f5c4;letter-spacing:4px;}
+.back{color:#475569;font-size:0.8rem;text-decoration:none;padding:6px 14px;border:1px solid #1e2340;border-radius:8px;}
+.back:hover{color:#00f5c4;border-color:#00f5c4;}
+#lock-screen{position:fixed;inset:0;background:#07080d;display:flex;align-items:center;justify-content:center;z-index:100;}
+.lock-box{background:#0d0f1a;border:1px solid #1e2340;border-radius:16px;padding:40px;text-align:center;width:320px;}
+.lock-title{font-size:1.5rem;font-weight:800;color:#00f5c4;margin-bottom:8px;}
+.lock-sub{font-size:0.8rem;color:#475569;margin-bottom:24px;}
+.pin-input{width:100%;background:#07080d;border:1px solid #1e2340;border-radius:8px;padding:12px 16px;color:#e2e8f0;font-family:'Space Mono',monospace;font-size:1.2rem;text-align:center;letter-spacing:8px;outline:none;margin-bottom:16px;}
+.pin-input:focus{border-color:#00f5c4;}
+.btn{width:100%;padding:12px;border:none;border-radius:8px;font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;cursor:pointer;background:#00f5c4;color:#07080d;transition:all .2s;}
+.btn:hover{background:#00ddb0;}
+.content{max-width:800px;margin:0 auto;padding:32px 24px;}
+h2{font-size:1rem;color:#00f5c4;font-family:'Space Mono',monospace;letter-spacing:3px;text-transform:uppercase;margin-bottom:16px;margin-top:32px;border-bottom:1px solid #1e2340;padding-bottom:8px;}
+.section-card{background:#0d0f1a;border:1px solid #1e2340;border-radius:12px;padding:16px 20px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.item-info{flex:1;}
+.item-name{font-weight:800;font-size:0.95rem;margin-bottom:3px;}
+.item-desc{font-size:0.72rem;color:#475569;}
+.item-tags{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;}
+.itag{font-size:0.6rem;background:#1e2340;color:#64748b;padding:2px 8px;border-radius:10px;font-family:'Space Mono',monospace;}
+.toggle{position:relative;width:48px;height:26px;flex-shrink:0;}
+.toggle input{opacity:0;width:0;height:0;}
+.slider{position:absolute;inset:0;background:#1e2340;border-radius:26px;cursor:pointer;transition:.3s;}
+.slider:before{content:'';position:absolute;width:20px;height:20px;left:3px;bottom:3px;background:#475569;border-radius:50%;transition:.3s;}
+input:checked+.slider{background:#00f5c4;}
+input:checked+.slider:before{transform:translateX(22px);background:#07080d;}
+.status-badge{font-size:0.6rem;font-family:'Space Mono',monospace;padding:2px 8px;border-radius:10px;margin-left:8px;}
+.status-live{background:rgba(0,245,196,0.1);color:#00f5c4;border:1px solid rgba(0,245,196,0.3);}
+.status-private{background:rgba(245,158,11,0.1);color:#fbbf24;border:1px solid rgba(245,158,11,0.3);}
+.status-wip{background:rgba(124,58,237,0.1);color:#a78bfa;border:1px solid rgba(124,58,237,0.3);}
+#save-bar{position:fixed;bottom:0;left:0;right:0;background:#0d0f1a;border-top:1px solid #1e2340;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;z-index:50;}
+.save-note{font-size:0.78rem;color:#475569;font-family:'Space Mono',monospace;}
+.save-btn{background:#00f5c4;color:#07080d;border:none;padding:10px 28px;border-radius:8px;font-family:'Syne',sans-serif;font-weight:800;cursor:pointer;font-size:0.9rem;transition:all .2s;}
+.save-btn:hover{background:#00ddb0;}
+.save-btn.saved{background:#1e2340;color:#00f5c4;border:1px solid #00f5c4;}
+.section-header-row{background:#07080d;border:1px solid #1e2340;border-radius:12px;padding:14px 20px;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;}
+.section-header-row .item-name{color:#00f5c4;}
+.gh-note{background:#0d0f1a;border:1px solid #1e2340;border-radius:10px;padding:16px;margin-top:24px;font-size:0.75rem;color:#475569;font-family:'Space Mono',monospace;line-height:1.8;}
+.gh-note a{color:#00f5c4;}
+</style>
+</head>
+<body>
+
+<div id="lock-screen">
+  <div class="lock-box">
+    <div class="lock-title">🔐 ADMIN</div>
+    <div class="lock-sub">Enter your PIN to access admin panel</div>
+    <input type="password" class="pin-input" id="pin-input" maxlength="6" placeholder="••••••" onkeydown="if(event.key==='Enter')unlock()">
+    <button class="btn" onclick="unlock()">UNLOCK</button>
+    <div id="pin-error" style="color:#ef4444;font-size:0.75rem;margin-top:12px;display:none;">Wrong PIN. Default is 1234</div>
+  </div>
+</div>
+
+<header>
+  <div class="logo">NEXUS // ADMIN</div>
+  <a class="back" href="../">← Back to Profile</a>
+</header>
+
+<div class="content" id="main-content" style="display:none;padding-bottom:80px;">
+
+  <h2>⚙️ Sections Visibility</h2>
+  <div id="sections-list"></div>
+
+  <h2>🎮 Games</h2>
+  <div id="games-list"></div>
+
+  <h2>🤖 AI Projects</h2>
+  <div id="ai-list"></div>
+
+  <h2>📈 Quant & Indicators</h2>
+  <div id="quant-list"></div>
+
+  <div class="gh-note">
+    <strong style="color:#e2e8f0;">How to save changes:</strong><br>
+    Changes are saved to your browser locally.<br>
+    To permanently update your live site:<br>
+    1. Click "Save Changes" below<br>
+    2. Copy the JSON that appears<br>
+    3. Go to: <a href="https://github.com/kenrus777/nexus-agent/edit/main/admin/config.json" target="_blank">Edit config.json on GitHub ↗</a><br>
+    4. Paste and commit — site updates in ~1 min
+  </div>
+
+</div>
+
+<div id="save-bar" style="display:none;">
+  <div class="save-note" id="save-note">Changes saved locally</div>
+  <button class="save-btn" id="save-btn" onclick="saveChanges()">💾 Save Changes</button>
+</div>
+
+<div id="json-output" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:200;align-items:center;justify-content:center;">
+  <div style="background:#0d0f1a;border:1px solid #00f5c4;border-radius:16px;padding:28px;width:90%;max-width:640px;max-height:80vh;overflow-y:auto;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+      <div style="color:#00f5c4;font-family:'Space Mono',monospace;font-size:0.85rem;">📋 COPY THIS → PASTE INTO config.json on GitHub</div>
+      <button onclick="document.getElementById('json-output').style.display='none'" style="background:transparent;border:none;color:#475569;font-size:1.2rem;cursor:pointer;">✕</button>
+    </div>
+    <textarea id="json-textarea" style="width:100%;height:300px;background:#07080d;border:1px solid #1e2340;border-radius:8px;padding:12px;color:#00f5c4;font-family:'Space Mono',monospace;font-size:0.72rem;outline:none;resize:vertical;"></textarea>
+    <div style="display:flex;gap:10px;margin-top:12px;">
+      <button onclick="copyJson()" style="flex:1;padding:10px;background:#00f5c4;color:#07080d;border:none;border-radius:8px;font-family:'Syne',sans-serif;font-weight:800;cursor:pointer;">📋 Copy JSON</button>
+      <a href="https://github.com/kenrus777/nexus-agent/edit/main/admin/config.json" target="_blank" style="flex:1;padding:10px;background:#1e2340;color:#00f5c4;border:none;border-radius:8px;font-family:'Syne',sans-serif;font-weight:800;cursor:pointer;text-align:center;text-decoration:none;">✏️ Edit on GitHub</a>
+    </div>
+  </div>
+</div>
+
+<script>
+const DEFAULT_PIN = '1234';
+let config = null;
+
+function unlock() {
+  const pin = document.getElementById('pin-input').value;
+  const stored = localStorage.getItem('admin_pin') || DEFAULT_PIN;
+  if (pin === stored) {
+    document.getElementById('lock-screen').style.display = 'none';
+    document.getElementById('main-content').style.display = 'block';
+    document.getElementById('save-bar').style.display = 'flex';
+    loadConfig();
+  } else {
+    document.getElementById('pin-error').style.display = 'block';
+    document.getElementById('pin-input').value = '';
+  }
+}
+
+async function loadConfig() {
+  try {
+    const res = await fetch('../admin/config.json?t=' + Date.now());
+    config = await res.json();
+  } catch(e) {
+    config = JSON.parse(localStorage.getItem('nexus_config') || '{}');
+  }
+  // Override with any local changes
+  const local = localStorage.getItem('nexus_config_draft');
+  if (local) { try { config = JSON.parse(local); } catch(e) {} }
+  renderAll();
+}
+
+function renderAll() {
+  renderSections();
+  renderList('games-list', config.games || []);
+  renderList('ai-list', config.ai_projects || []);
+  renderList('quant-list', config.quant || []);
+}
+
+function renderSections() {
+  const el = document.getElementById('sections-list');
+  el.innerHTML = '';
+  Object.entries(config.sections || {}).forEach(([key, sec]) => {
+    el.innerHTML += `
+      <div class="section-header-row">
+        <div class="item-info">
+          <div class="item-name">${sec.label}</div>
+          <div class="item-desc">${sec.description}</div>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" ${sec.visible?'checked':''} onchange="toggleSection('${key}', this.checked)">
+          <span class="slider"></span>
+        </label>
+      </div>`;
+  });
+}
+
+function renderList(containerId, items) {
+  const el = document.getElementById(containerId);
+  if (!items || !items.length) { el.innerHTML = '<div style="color:#374151;font-size:0.8rem;padding:12px 0;">No items yet</div>'; return; }
+  el.innerHTML = items.map((item, idx) => `
+    <div class="section-card">
+      <div style="font-size:1.8rem;flex-shrink:0;">${item.emoji||'📌'}</div>
+      <div class="item-info">
+        <div class="item-name">${item.name} <span class="status-badge status-${item.status||'live'}">${item.status||'live'}</span></div>
+        <div class="item-desc">${item.desc}</div>
+        <div class="item-tags">${(item.tags||[]).map(t=>`<span class="itag">${t}</span>`).join('')}</div>
+      </div>
+      <label class="toggle">
+        <input type="checkbox" ${item.visible?'checked':''} onchange="toggleItem('${containerId}', ${idx}, this.checked)">
+        <span class="slider"></span>
+      </label>
+    </div>`).join('');
+}
+
+function toggleSection(key, val) {
+  config.sections[key].visible = val;
+  saveDraft();
+}
+
+function toggleItem(listId, idx, val) {
+  const map = {'games-list':'games','ai-list':'ai_projects','quant-list':'quant'};
+  const key = map[listId];
+  if (config[key] && config[key][idx]) {
+    config[key][idx].visible = val;
+    saveDraft();
+  }
+}
+
+function saveDraft() {
+  localStorage.setItem('nexus_config_draft', JSON.stringify(config));
+  document.getElementById('save-note').textContent = '● Unsaved changes';
+  document.getElementById('save-note').style.color = '#fbbf24';
+}
+
+function saveChanges() {
+  localStorage.setItem('nexus_config_draft', JSON.stringify(config));
+  document.getElementById('json-textarea').value = JSON.stringify(config, null, 2);
+  document.getElementById('json-output').style.display = 'flex';
+  document.getElementById('save-note').textContent = 'Changes saved locally';
+  document.getElementById('save-note').style.color = '#475569';
+}
+
+function copyJson() {
+  const ta = document.getElementById('json-textarea');
+  ta.select();
+  document.execCommand('copy');
+  const btn = event.target;
+  btn.textContent = '✅ Copied!';
+  setTimeout(() => btn.textContent = '📋 Copy JSON', 2000);
+}
+
+document.getElementById('pin-input').focus();
+</script>
+</body>
+</html>
