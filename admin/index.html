@@ -8,117 +8,253 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:#07080d;color:#e2e8f0;font-family:'Syne',sans-serif;min-height:100vh;}
-header{background:#0d0f1a;border-bottom:1px solid #1e2340;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;}
+header{background:#0d0f1a;border-bottom:1px solid #1e2340;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:40;}
 .logo{font-family:'Space Mono',monospace;font-size:1rem;color:#00f5c4;letter-spacing:4px;}
-.back{color:#475569;font-size:0.8rem;text-decoration:none;padding:6px 14px;border:1px solid #1e2340;border-radius:8px;}
+.back{color:#475569;font-size:0.8rem;text-decoration:none;padding:6px 14px;border:1px solid #1e2340;border-radius:8px;transition:all .2s;}
 .back:hover{color:#00f5c4;border-color:#00f5c4;}
+
+/* LOCK SCREEN */
 #lock-screen{position:fixed;inset:0;background:#07080d;display:flex;align-items:center;justify-content:center;z-index:100;}
-.lock-box{background:#0d0f1a;border:1px solid #1e2340;border-radius:16px;padding:40px;text-align:center;width:320px;}
-.lock-title{font-size:1.5rem;font-weight:800;color:#00f5c4;margin-bottom:8px;}
-.lock-sub{font-size:0.8rem;color:#475569;margin-bottom:24px;}
-.pin-input{width:100%;background:#07080d;border:1px solid #1e2340;border-radius:8px;padding:12px 16px;color:#e2e8f0;font-family:'Space Mono',monospace;font-size:1.2rem;text-align:center;letter-spacing:8px;outline:none;margin-bottom:16px;}
-.pin-input:focus{border-color:#00f5c4;}
-.btn{width:100%;padding:12px;border:none;border-radius:8px;font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;cursor:pointer;background:#00f5c4;color:#07080d;transition:all .2s;}
-.btn:hover{background:#00ddb0;}
-.content{max-width:800px;margin:0 auto;padding:32px 24px;}
-h2{font-size:1rem;color:#00f5c4;font-family:'Space Mono',monospace;letter-spacing:3px;text-transform:uppercase;margin-bottom:16px;margin-top:32px;border-bottom:1px solid #1e2340;padding-bottom:8px;}
-.section-card{background:#0d0f1a;border:1px solid #1e2340;border-radius:12px;padding:16px 20px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.lock-box{background:#0d0f1a;border:1px solid #1e2340;border-radius:16px;padding:36px;text-align:center;width:320px;}
+.lock-title{font-size:1.4rem;font-weight:800;color:#00f5c4;margin-bottom:6px;}
+.lock-sub{font-size:0.75rem;color:#475569;margin-bottom:22px;line-height:1.6;}
+.pin-input{width:100%;background:#07080d;border:1px solid #1e2340;border-radius:8px;padding:12px 16px;color:#e2e8f0;font-family:'Space Mono',monospace;font-size:1.4rem;text-align:center;letter-spacing:10px;outline:none;margin-bottom:14px;}
+.pin-input:focus{border-color:#00f5c4;box-shadow:0 0 0 3px rgba(0,245,196,0.1);}
+.lock-btn{width:100%;padding:12px;border:none;border-radius:8px;font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;cursor:pointer;background:#00f5c4;color:#07080d;transition:all .2s;}
+.lock-btn:hover{background:#00ddb0;}
+.pin-error{color:#ef4444;font-size:0.72rem;margin-top:10px;display:none;font-family:'Space Mono',monospace;}
+
+/* CONTENT */
+.content{max-width:800px;margin:0 auto;padding:28px 24px 100px;}
+.section-title{font-size:0.78rem;color:#00f5c4;font-family:'Space Mono',monospace;letter-spacing:3px;text-transform:uppercase;margin:32px 0 14px;padding-bottom:8px;border-bottom:1px solid #1e2340;display:flex;align-items:center;gap:8px;}
+
+/* INFO BOX */
+.info-box{background:#0d0f1a;border:1px solid #1e2340;border-radius:12px;padding:16px 20px;margin-bottom:20px;font-size:0.78rem;font-family:'Space Mono',monospace;line-height:2;}
+.info-box .row{display:flex;align-items:flex-start;gap:10px;margin-bottom:4px;}
+.info-box .label{color:#475569;flex-shrink:0;min-width:80px;}
+.info-box .val{color:#e2e8f0;}
+.info-box .val.green{color:#00f5c4;}
+.info-box .val.amber{color:#fbbf24;}
+.info-box .val.red{color:#ef4444;}
+.info-box a{color:#00f5c4;}
+
+/* CARDS */
+.card{background:#0d0f1a;border:1px solid #1e2340;border-radius:12px;padding:14px 18px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:12px;transition:border-color .2s;}
+.card:hover{border-color:#2d3563;}
+.card.section-card{border-left:3px solid #00f5c4;}
+.item-emoji{font-size:1.6rem;flex-shrink:0;}
 .item-info{flex:1;}
-.item-name{font-weight:800;font-size:0.95rem;margin-bottom:3px;}
-.item-desc{font-size:0.72rem;color:#475569;}
-.item-tags{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;}
-.itag{font-size:0.6rem;background:#1e2340;color:#64748b;padding:2px 8px;border-radius:10px;font-family:'Space Mono',monospace;}
-.toggle{position:relative;width:48px;height:26px;flex-shrink:0;}
+.item-name{font-weight:800;font-size:0.9rem;margin-bottom:3px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.item-desc{font-size:0.7rem;color:#475569;margin-bottom:5px;}
+.item-tags{display:flex;gap:5px;flex-wrap:wrap;}
+.itag{font-size:0.58rem;background:#1e2340;color:#64748b;padding:2px 7px;border-radius:10px;font-family:'Space Mono',monospace;}
+.badge{font-size:0.58rem;font-family:'Space Mono',monospace;padding:2px 7px;border-radius:10px;}
+.badge-live{background:rgba(0,245,196,0.1);color:#00f5c4;border:1px solid rgba(0,245,196,0.2);}
+.badge-private{background:rgba(245,158,11,0.1);color:#fbbf24;border:1px solid rgba(245,158,11,0.2);}
+.badge-wip{background:rgba(124,58,237,0.1);color:#a78bfa;border:1px solid rgba(124,58,237,0.2);}
+
+/* TOGGLE */
+.toggle{position:relative;width:46px;height:24px;flex-shrink:0;}
 .toggle input{opacity:0;width:0;height:0;}
-.slider{position:absolute;inset:0;background:#1e2340;border-radius:26px;cursor:pointer;transition:.3s;}
-.slider:before{content:'';position:absolute;width:20px;height:20px;left:3px;bottom:3px;background:#475569;border-radius:50%;transition:.3s;}
+.slider{position:absolute;inset:0;background:#1e2340;border-radius:24px;cursor:pointer;transition:.25s;}
+.slider:before{content:'';position:absolute;width:18px;height:18px;left:3px;bottom:3px;background:#475569;border-radius:50%;transition:.25s;}
 input:checked+.slider{background:#00f5c4;}
 input:checked+.slider:before{transform:translateX(22px);background:#07080d;}
-.status-badge{font-size:0.6rem;font-family:'Space Mono',monospace;padding:2px 8px;border-radius:10px;margin-left:8px;}
-.status-live{background:rgba(0,245,196,0.1);color:#00f5c4;border:1px solid rgba(0,245,196,0.3);}
-.status-private{background:rgba(245,158,11,0.1);color:#fbbf24;border:1px solid rgba(245,158,11,0.3);}
-.status-wip{background:rgba(124,58,237,0.1);color:#a78bfa;border:1px solid rgba(124,58,237,0.3);}
-#save-bar{position:fixed;bottom:0;left:0;right:0;background:#0d0f1a;border-top:1px solid #1e2340;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;z-index:50;}
-.save-note{font-size:0.78rem;color:#475569;font-family:'Space Mono',monospace;}
-.save-btn{background:#00f5c4;color:#07080d;border:none;padding:10px 28px;border-radius:8px;font-family:'Syne',sans-serif;font-weight:800;cursor:pointer;font-size:0.9rem;transition:all .2s;}
+
+/* SAVE BAR */
+#save-bar{position:fixed;bottom:0;left:0;right:0;background:#0d0f1a;border-top:1px solid #1e2340;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;z-index:50;gap:12px;}
+.save-status{font-size:0.72rem;color:#475569;font-family:'Space Mono',monospace;display:flex;align-items:center;gap:6px;}
+.save-status .dot{width:7px;height:7px;border-radius:50%;background:#475569;}
+.save-status.dirty .dot{background:#fbbf24;box-shadow:0 0 6px #fbbf24;}
+.save-status.dirty{color:#fbbf24;}
+.save-status.saved .dot{background:#00f5c4;box-shadow:0 0 6px #00f5c4;}
+.save-status.saved{color:#00f5c4;}
+.save-btn{background:#00f5c4;color:#07080d;border:none;padding:9px 22px;border-radius:8px;font-family:'Syne',sans-serif;font-weight:800;cursor:pointer;font-size:0.85rem;white-space:nowrap;}
 .save-btn:hover{background:#00ddb0;}
-.save-btn.saved{background:#1e2340;color:#00f5c4;border:1px solid #00f5c4;}
-.section-header-row{background:#07080d;border:1px solid #1e2340;border-radius:12px;padding:14px 20px;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;}
-.section-header-row .item-name{color:#00f5c4;}
-.gh-note{background:#0d0f1a;border:1px solid #1e2340;border-radius:10px;padding:16px;margin-top:24px;font-size:0.75rem;color:#475569;font-family:'Space Mono',monospace;line-height:1.8;}
-.gh-note a{color:#00f5c4;}
+.save-btn.gh{background:#1e2340;color:#00f5c4;border:1px solid #00f5c4;}
+.save-btn.gh:hover{background:rgba(0,245,196,0.1);}
+
+/* SETTINGS INPUTS */
+.field{margin-bottom:16px;}
+.field label{display:block;font-size:0.68rem;color:#475569;font-family:'Space Mono',monospace;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;}
+.field input{width:100%;background:#07080d;border:1px solid #1e2340;border-radius:8px;padding:10px 14px;color:#e2e8f0;font-family:'Space Mono',monospace;font-size:0.85rem;outline:none;transition:border-color .2s;}
+.field input:focus{border-color:#00f5c4;}
+.field input::placeholder{color:#374151;}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.mini-btn{padding:9px 18px;border:none;border-radius:8px;font-family:'Syne',sans-serif;font-weight:800;font-size:0.8rem;cursor:pointer;transition:all .2s;}
+.mini-btn.green{background:#00f5c4;color:#07080d;}
+.mini-btn.green:hover{background:#00ddb0;}
+.mini-btn.red{background:transparent;border:1px solid #ef4444;color:#ef4444;}
+.mini-btn.red:hover{background:rgba(239,68,68,0.1);}
+.mini-btn.gray{background:#1e2340;color:#94a3b8;}
+
+/* MODAL */
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);align-items:center;justify-content:center;z-index:200;}
+.modal.open{display:flex;}
+.modal-box{background:#0d0f1a;border:1px solid #00f5c4;border-radius:16px;padding:26px;width:90%;max-width:560px;}
+.modal-title{font-size:1rem;color:#00f5c4;font-family:'Space Mono',monospace;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;}
+.modal-close{background:transparent;border:none;color:#475569;font-size:1.1rem;cursor:pointer;}
+.modal-close:hover{color:#fff;}
+textarea.json-area{width:100%;height:260px;background:#07080d;border:1px solid #1e2340;border-radius:8px;padding:12px;color:#00f5c4;font-family:'Space Mono',monospace;font-size:0.7rem;outline:none;resize:vertical;}
+.modal-actions{display:flex;gap:10px;margin-top:12px;}
+
+/* TOAST */
+#toast{position:fixed;top:24px;right:24px;background:#0d0f1a;border:1px solid #00f5c4;border-radius:10px;padding:10px 18px;font-size:0.78rem;font-family:'Space Mono',monospace;color:#00f5c4;z-index:999;transform:translateY(-80px);opacity:0;transition:all .3s;}
+#toast.show{transform:translateY(0);opacity:1;}
+#toast.error{border-color:#ef4444;color:#ef4444;}
 </style>
 </head>
 <body>
 
 <div id="lock-screen">
   <div class="lock-box">
-    <div class="lock-title">🔐 ADMIN</div>
-    <div class="lock-sub">Enter your PIN to access admin panel</div>
-    <input type="password" class="pin-input" id="pin-input" maxlength="6" placeholder="••••••" onkeydown="if(event.key==='Enter')unlock()">
-    <button class="btn" onclick="unlock()">UNLOCK</button>
-    <div id="pin-error" style="color:#ef4444;font-size:0.75rem;margin-top:12px;display:none;">Wrong PIN. Default is 1234</div>
+    <div class="lock-title">🔐 ADMIN PANEL</div>
+    <div class="lock-sub">Enter your PIN to manage your portfolio<br><span style="color:#1e2340">Default PIN is 1234</span></div>
+    <input type="password" class="pin-input" id="pin-input" maxlength="6" placeholder="••••" onkeydown="if(event.key==='Enter')unlock()">
+    <button class="lock-btn" onclick="unlock()">UNLOCK →</button>
+    <div class="pin-error" id="pin-error">❌ Wrong PIN. Try again.</div>
   </div>
 </div>
 
 <header>
   <div class="logo">NEXUS // ADMIN</div>
-  <a class="back" href="../">← Back to Profile</a>
+  <a class="back" href="../">← Profile</a>
 </header>
 
-<div class="content" id="main-content" style="display:none;padding-bottom:80px;">
+<div class="content" id="main-content" style="display:none;">
 
-  <h2>⚙️ Sections Visibility</h2>
+  <!-- SAVE STATUS INFO -->
+  <div class="section-title">📦 Data Storage</div>
+  <div class="info-box" id="storage-info">
+    <div class="row"><span class="label">Browser:</span><span class="val amber" id="local-status">Checking...</span></div>
+    <div class="row"><span class="label">GitHub:</span><span class="val" id="gh-status">config.json (source of truth)</span></div>
+    <div class="row"><span class="label">How it works:</span><span class="val" style="color:#475569">Toggles save instantly to browser. Click "Push to GitHub" to make changes permanent for all visitors.</span></div>
+    <div class="row"><span class="label">Auto-push:</span><span class="val amber" id="gh-token-status">❌ No GitHub token — manual push required</span></div>
+  </div>
+
+  <!-- GITHUB TOKEN (for auto-push) -->
+  <div class="section-title">🔑 GitHub Auto-Push</div>
+  <div class="card" style="flex-direction:column;align-items:stretch;gap:12px;">
+    <div style="font-size:0.78rem;color:#475569;line-height:1.6;">
+      Add your GitHub token to enable <strong style="color:#00f5c4">one-click push to GitHub</strong> — no copy-paste needed.<br>
+      <span style="color:#374151;font-size:0.7rem;">Token stored in browser only. Never sent anywhere except GitHub API.</span>
+    </div>
+    <div class="field-row">
+      <div class="field" style="margin:0;">
+        <label>GitHub Personal Access Token</label>
+        <input type="password" id="gh-token-input" placeholder="ghp_xxxxxxxxxxxx">
+      </div>
+      <div style="display:flex;align-items:flex-end;gap:8px;">
+        <button class="mini-btn green" onclick="saveToken()">Save Token</button>
+        <button class="mini-btn red" onclick="clearToken()">Clear</button>
+      </div>
+    </div>
+    <div style="font-size:0.68rem;color:#374151;font-family:'Space Mono',monospace;">
+      Get token: github.com → Settings → Developer settings → Personal access tokens → Generate (needs: repo scope)
+    </div>
+  </div>
+
+  <!-- PIN CHANGE -->
+  <div class="section-title">🔒 Change PIN</div>
+  <div class="card" style="flex-direction:column;align-items:stretch;gap:12px;">
+    <div style="font-size:0.78rem;color:#475569;line-height:1.6;">
+      Change your admin panel unlock PIN. PIN is saved to <strong style="color:#fbbf24">browser localStorage</strong> and to <strong style="color:#00f5c4">config.json on GitHub</strong> (if token set).
+    </div>
+    <div class="field-row">
+      <div class="field" style="margin:0;">
+        <label>Current PIN</label>
+        <input type="password" id="pin-current" placeholder="Enter current PIN" maxlength="6">
+      </div>
+      <div class="field" style="margin:0;">
+        <label>New PIN</label>
+        <input type="password" id="pin-new" placeholder="Enter new PIN (4-6 digits)" maxlength="6">
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;">
+      <button class="mini-btn green" onclick="changePin()">🔒 Update PIN</button>
+      <button class="mini-btn gray" onclick="resetPin()">Reset to 1234</button>
+    </div>
+    <div id="pin-msg" style="font-size:0.72rem;font-family:'Space Mono',monospace;display:none;"></div>
+  </div>
+
+  <!-- SECTIONS VISIBILITY -->
+  <div class="section-title">👁️ Sections — Show / Hide on Profile</div>
   <div id="sections-list"></div>
 
-  <h2>🎮 Games</h2>
+  <!-- GAMES -->
+  <div class="section-title">🎮 Games</div>
   <div id="games-list"></div>
 
-  <h2>🤖 AI Projects</h2>
+  <!-- AI PROJECTS -->
+  <div class="section-title">🤖 AI Projects</div>
   <div id="ai-list"></div>
 
-  <h2>📈 Quant & Indicators</h2>
+  <!-- QUANT -->
+  <div class="section-title">📈 Quant & Indicators</div>
   <div id="quant-list"></div>
 
-  <div class="gh-note">
-    <strong style="color:#e2e8f0;">How to save changes:</strong><br>
-    Changes are saved to your browser locally.<br>
-    To permanently update your live site:<br>
-    1. Click "Save Changes" below<br>
-    2. Copy the JSON that appears<br>
-    3. Go to: <a href="https://github.com/kenrus777/nexus-agent/edit/main/admin/config.json" target="_blank">Edit config.json on GitHub ↗</a><br>
-    4. Paste and commit — site updates in ~1 min
-  </div>
-
 </div>
 
+<!-- SAVE BAR -->
 <div id="save-bar" style="display:none;">
-  <div class="save-note" id="save-note">Changes saved locally</div>
-  <button class="save-btn" id="save-btn" onclick="saveChanges()">💾 Save Changes</button>
+  <div class="save-status" id="save-status">
+    <div class="dot"></div>
+    <span id="save-label">No changes</span>
+  </div>
+  <div style="display:flex;gap:8px;">
+    <button class="save-btn gh" onclick="showJsonModal()">📋 Copy JSON</button>
+    <button class="save-btn" id="push-btn" onclick="pushToGitHub()">🚀 Push to GitHub</button>
+  </div>
 </div>
 
-<div id="json-output" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:200;align-items:center;justify-content:center;">
-  <div style="background:#0d0f1a;border:1px solid #00f5c4;border-radius:16px;padding:28px;width:90%;max-width:640px;max-height:80vh;overflow-y:auto;">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
-      <div style="color:#00f5c4;font-family:'Space Mono',monospace;font-size:0.85rem;">📋 COPY THIS → PASTE INTO config.json on GitHub</div>
-      <button onclick="document.getElementById('json-output').style.display='none'" style="background:transparent;border:none;color:#475569;font-size:1.2rem;cursor:pointer;">✕</button>
+<!-- JSON MODAL -->
+<div class="modal" id="json-modal">
+  <div class="modal-box">
+    <div class="modal-title">
+      <span>📋 config.json — copy & paste to GitHub</span>
+      <button class="modal-close" onclick="closeModal('json-modal')">✕</button>
     </div>
-    <textarea id="json-textarea" style="width:100%;height:300px;background:#07080d;border:1px solid #1e2340;border-radius:8px;padding:12px;color:#00f5c4;font-family:'Space Mono',monospace;font-size:0.72rem;outline:none;resize:vertical;"></textarea>
-    <div style="display:flex;gap:10px;margin-top:12px;">
-      <button onclick="copyJson()" style="flex:1;padding:10px;background:#00f5c4;color:#07080d;border:none;border-radius:8px;font-family:'Syne',sans-serif;font-weight:800;cursor:pointer;">📋 Copy JSON</button>
-      <a href="https://github.com/kenrus777/nexus-agent/edit/main/admin/config.json" target="_blank" style="flex:1;padding:10px;background:#1e2340;color:#00f5c4;border:none;border-radius:8px;font-family:'Syne',sans-serif;font-weight:800;cursor:pointer;text-align:center;text-decoration:none;">✏️ Edit on GitHub</a>
+    <textarea class="json-area" id="json-area"></textarea>
+    <div class="modal-actions">
+      <button class="mini-btn green" onclick="copyJson()" style="flex:1;">📋 Copy JSON</button>
+      <a href="https://github.com/kenrus777/nexus-agent/edit/main/admin/config.json"
+         target="_blank" class="mini-btn gray" style="flex:1;text-align:center;text-decoration:none;display:block;padding:9px 18px;">
+        ✏️ Edit on GitHub ↗
+      </a>
     </div>
   </div>
 </div>
+
+<div id="toast"></div>
 
 <script>
+// ── CONSTANTS ──────────────────────────────────────────────────────────
+const REPO_OWNER = 'kenrus777';
+const REPO_NAME  = 'nexus-agent';
+const CONFIG_PATH = 'admin/config.json';
 const DEFAULT_PIN = '1234';
+
 let config = null;
+let dirty = false;
+let configSha = null; // GitHub file SHA needed for updates
+
+// ── TOAST ──────────────────────────────────────────────────────────────
+function toast(msg, isError=false) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = isError ? 'error show' : 'show';
+  clearTimeout(t._t);
+  t._t = setTimeout(() => t.className = '', 3000);
+}
+
+// ── PIN ────────────────────────────────────────────────────────────────
+function getPin() {
+  return config?.admin?.pin || localStorage.getItem('admin_pin') || DEFAULT_PIN;
+}
 
 function unlock() {
-  const pin = document.getElementById('pin-input').value;
-  const stored = localStorage.getItem('admin_pin') || DEFAULT_PIN;
-  if (pin === stored) {
+  const entered = document.getElementById('pin-input').value;
+  if (entered === getPin()) {
     document.getElementById('lock-screen').style.display = 'none';
     document.getElementById('main-content').style.display = 'block';
     document.getElementById('save-bar').style.display = 'flex';
@@ -126,102 +262,284 @@ function unlock() {
   } else {
     document.getElementById('pin-error').style.display = 'block';
     document.getElementById('pin-input').value = '';
+    setTimeout(() => document.getElementById('pin-error').style.display='none', 2000);
   }
 }
 
-async function loadConfig() {
-  try {
-    const res = await fetch('../admin/config.json?t=' + Date.now());
-    config = await res.json();
-  } catch(e) {
-    config = JSON.parse(localStorage.getItem('nexus_config') || '{}');
+function changePin() {
+  const cur = document.getElementById('pin-current').value;
+  const neo = document.getElementById('pin-new').value;
+  const msg = document.getElementById('pin-msg');
+  if (cur !== getPin()) {
+    msg.style.color = '#ef4444'; msg.textContent = '❌ Current PIN is wrong.'; msg.style.display='block'; return;
   }
-  // Override with any local changes
-  const local = localStorage.getItem('nexus_config_draft');
-  if (local) { try { config = JSON.parse(local); } catch(e) {} }
+  if (!neo || neo.length < 4) {
+    msg.style.color = '#ef4444'; msg.textContent = '❌ New PIN must be 4-6 digits.'; msg.style.display='block'; return;
+  }
+  if (!/^\d+$/.test(neo)) {
+    msg.style.color = '#ef4444'; msg.textContent = '❌ PIN must be numbers only.'; msg.style.display='block'; return;
+  }
+  // Save PIN
+  if (!config.admin) config.admin = {};
+  config.admin.pin = neo;
+  localStorage.setItem('admin_pin', neo);
+  document.getElementById('pin-current').value = '';
+  document.getElementById('pin-new').value = '';
+  msg.style.color = '#00f5c4'; msg.textContent = '✅ PIN updated! Push to GitHub to make permanent.'; msg.style.display='block';
+  markDirty();
+  toast('✅ PIN changed successfully');
+}
+
+function resetPin() {
+  if (!confirm('Reset PIN to 1234?')) return;
+  if (!config.admin) config.admin = {};
+  config.admin.pin = DEFAULT_PIN;
+  localStorage.setItem('admin_pin', DEFAULT_PIN);
+  markDirty();
+  toast('PIN reset to 1234');
+}
+
+// ── GITHUB TOKEN ───────────────────────────────────────────────────────
+function getToken() { return localStorage.getItem('gh_token') || ''; }
+
+function saveToken() {
+  const t = document.getElementById('gh-token-input').value.trim();
+  if (!t) { toast('❌ Enter a token first', true); return; }
+  localStorage.setItem('gh_token', t);
+  document.getElementById('gh-token-input').value = '';
+  updateTokenStatus();
+  toast('✅ Token saved to browser');
+}
+
+function clearToken() {
+  localStorage.removeItem('gh_token');
+  updateTokenStatus();
+  toast('Token cleared');
+}
+
+function updateTokenStatus() {
+  const t = getToken();
+  const el = document.getElementById('gh-token-status');
+  const pushBtn = document.getElementById('push-btn');
+  if (t) {
+    el.textContent = '✅ Token set — auto-push enabled';
+    el.className = 'val green';
+    pushBtn.style.opacity = '1';
+  } else {
+    el.textContent = '❌ No GitHub token — manual push required';
+    el.className = 'val amber';
+    pushBtn.style.opacity = '0.4';
+  }
+}
+
+// ── LOAD CONFIG ────────────────────────────────────────────────────────
+async function loadConfig() {
+  updateTokenStatus();
+
+  // Check local draft first
+  const draft = localStorage.getItem('nexus_config_draft');
+
+  try {
+    // Fetch from GitHub with SHA
+    const token = getToken();
+    const headers = token ? { 'Authorization': `Bearer ${token}` } : {};
+    const res = await fetch(
+      `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${CONFIG_PATH}`,
+      { headers }
+    );
+    if (res.ok) {
+      const data = await res.json();
+      configSha = data.sha;
+      const ghConfig = JSON.parse(atob(data.content.replace(/\n/g, '')));
+
+      if (draft) {
+        // Local draft exists — use it but note the difference
+        try { config = JSON.parse(draft); } catch(e) { config = ghConfig; }
+        markDirty();
+        document.getElementById('local-status').textContent = '⚠️ Local draft exists (differs from GitHub)';
+        document.getElementById('local-status').className = 'val amber';
+      } else {
+        config = ghConfig;
+        document.getElementById('local-status').textContent = '✅ In sync with GitHub';
+        document.getElementById('local-status').className = 'val green';
+      }
+      document.getElementById('gh-status').textContent = '✅ config.json loaded from GitHub';
+      document.getElementById('gh-status').className = 'val green';
+    } else {
+      throw new Error('GitHub fetch failed');
+    }
+  } catch(e) {
+    // Fallback to local
+    if (draft) {
+      try { config = JSON.parse(draft); } catch(err) { config = {}; }
+    } else {
+      config = {};
+    }
+    document.getElementById('gh-status').textContent = '⚠️ Could not reach GitHub — using local data';
+    document.getElementById('gh-status').className = 'val amber';
+    document.getElementById('local-status').textContent = draft ? '📦 Using local draft' : '❌ No local data';
+  }
+
+  // Load token into input placeholder hint
+  const t = getToken();
+  if (t) document.getElementById('gh-token-input').placeholder = 'ghp_••••••••••••••• (saved)';
+
   renderAll();
 }
 
+// ── RENDER ─────────────────────────────────────────────────────────────
 function renderAll() {
   renderSections();
-  renderList('games-list', config.games || []);
-  renderList('ai-list', config.ai_projects || []);
-  renderList('quant-list', config.quant || []);
+  renderList('games-list', config.games || [], 'games');
+  renderList('ai-list', config.ai_projects || [], 'ai_projects');
+  renderList('quant-list', config.quant || [], 'quant');
 }
 
 function renderSections() {
   const el = document.getElementById('sections-list');
   el.innerHTML = '';
   Object.entries(config.sections || {}).forEach(([key, sec]) => {
-    el.innerHTML += `
-      <div class="section-header-row">
-        <div class="item-info">
-          <div class="item-name">${sec.label}</div>
-          <div class="item-desc">${sec.description}</div>
-        </div>
-        <label class="toggle">
-          <input type="checkbox" ${sec.visible?'checked':''} onchange="toggleSection('${key}', this.checked)">
-          <span class="slider"></span>
-        </label>
-      </div>`;
+    const div = document.createElement('div');
+    div.className = 'card section-card';
+    div.innerHTML = `
+      <div class="item-info">
+        <div class="item-name">${sec.label}</div>
+        <div class="item-desc">${sec.description}</div>
+      </div>
+      <label class="toggle">
+        <input type="checkbox" ${sec.visible?'checked':''} onchange="toggleSection('${key}',this.checked)">
+        <span class="slider"></span>
+      </label>`;
+    el.appendChild(div);
   });
 }
 
-function renderList(containerId, items) {
+function renderList(containerId, items, key) {
   const el = document.getElementById(containerId);
-  if (!items || !items.length) { el.innerHTML = '<div style="color:#374151;font-size:0.8rem;padding:12px 0;">No items yet</div>'; return; }
+  if (!items.length) {
+    el.innerHTML = '<div style="color:#374151;font-size:0.78rem;padding:8px 0;font-family:Space Mono,monospace;">No items yet — add them to config.json</div>';
+    return;
+  }
   el.innerHTML = items.map((item, idx) => `
-    <div class="section-card">
-      <div style="font-size:1.8rem;flex-shrink:0;">${item.emoji||'📌'}</div>
+    <div class="card">
+      <div class="item-emoji">${item.emoji||'📌'}</div>
       <div class="item-info">
-        <div class="item-name">${item.name} <span class="status-badge status-${item.status||'live'}">${item.status||'live'}</span></div>
+        <div class="item-name">
+          ${item.name}
+          <span class="badge badge-${item.status||'live'}">${item.status||'live'}</span>
+        </div>
         <div class="item-desc">${item.desc}</div>
         <div class="item-tags">${(item.tags||[]).map(t=>`<span class="itag">${t}</span>`).join('')}</div>
       </div>
       <label class="toggle">
-        <input type="checkbox" ${item.visible?'checked':''} onchange="toggleItem('${containerId}', ${idx}, this.checked)">
+        <input type="checkbox" ${item.visible?'checked':''} onchange="toggleItem('${key}',${idx},this.checked)">
         <span class="slider"></span>
       </label>
     </div>`).join('');
 }
 
+// ── TOGGLE ─────────────────────────────────────────────────────────────
 function toggleSection(key, val) {
   config.sections[key].visible = val;
-  saveDraft();
+  markDirty();
 }
 
-function toggleItem(listId, idx, val) {
-  const map = {'games-list':'games','ai-list':'ai_projects','quant-list':'quant'};
-  const key = map[listId];
+function toggleItem(key, idx, val) {
   if (config[key] && config[key][idx]) {
     config[key][idx].visible = val;
-    saveDraft();
+    markDirty();
   }
 }
 
-function saveDraft() {
+// ── DIRTY STATE ────────────────────────────────────────────────────────
+function markDirty() {
+  dirty = true;
   localStorage.setItem('nexus_config_draft', JSON.stringify(config));
-  document.getElementById('save-note').textContent = '● Unsaved changes';
-  document.getElementById('save-note').style.color = '#fbbf24';
+  const ss = document.getElementById('save-status');
+  ss.className = 'save-status dirty';
+  document.getElementById('save-label').textContent = '● Unsaved changes — push to make live';
+  document.getElementById('local-status').textContent = '⚠️ Local draft differs from GitHub';
+  document.getElementById('local-status').className = 'val amber';
 }
 
-function saveChanges() {
-  localStorage.setItem('nexus_config_draft', JSON.stringify(config));
-  document.getElementById('json-textarea').value = JSON.stringify(config, null, 2);
-  document.getElementById('json-output').style.display = 'flex';
-  document.getElementById('save-note').textContent = 'Changes saved locally';
-  document.getElementById('save-note').style.color = '#475569';
+function markSaved() {
+  dirty = false;
+  localStorage.removeItem('nexus_config_draft');
+  const ss = document.getElementById('save-status');
+  ss.className = 'save-status saved';
+  document.getElementById('save-label').textContent = '✅ Saved to GitHub';
+  document.getElementById('local-status').textContent = '✅ In sync with GitHub';
+  document.getElementById('local-status').className = 'val green';
 }
+
+// ── PUSH TO GITHUB ─────────────────────────────────────────────────────
+async function pushToGitHub() {
+  const token = getToken();
+  if (!token) {
+    toast('❌ No GitHub token — add one above or use Copy JSON', true);
+    showJsonModal();
+    return;
+  }
+
+  const btn = document.getElementById('push-btn');
+  btn.textContent = '⏳ Pushing...';
+  btn.disabled = true;
+
+  try {
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(config, null, 2))));
+    const body = {
+      message: 'Admin: update config.json visibility settings',
+      content,
+      sha: configSha
+    };
+
+    const res = await fetch(
+      `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${CONFIG_PATH}`,
+      {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+      }
+    );
+
+    if (res.ok) {
+      const data = await res.json();
+      configSha = data.content.sha; // update SHA for next push
+      markSaved();
+      toast('✅ Pushed to GitHub! Site updates in ~1 min');
+    } else {
+      const err = await res.json();
+      toast(`❌ GitHub error: ${err.message}`, true);
+    }
+  } catch(e) {
+    toast('❌ Push failed: ' + e.message, true);
+  }
+
+  btn.textContent = '🚀 Push to GitHub';
+  btn.disabled = false;
+}
+
+// ── JSON MODAL ─────────────────────────────────────────────────────────
+function showJsonModal() {
+  document.getElementById('json-area').value = JSON.stringify(config, null, 2);
+  document.getElementById('json-modal').classList.add('open');
+}
+
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
 
 function copyJson() {
-  const ta = document.getElementById('json-textarea');
-  ta.select();
-  document.execCommand('copy');
-  const btn = event.target;
-  btn.textContent = '✅ Copied!';
-  setTimeout(() => btn.textContent = '📋 Copy JSON', 2000);
+  const ta = document.getElementById('json-area');
+  ta.select(); document.execCommand('copy');
+  toast('✅ JSON copied to clipboard');
 }
 
+// ── INIT ────────────────────────────────────────────────────────────────
+document.getElementById('pin-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') unlock();
+});
 document.getElementById('pin-input').focus();
 </script>
 </body>
