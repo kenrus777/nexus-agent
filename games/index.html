@@ -15,13 +15,15 @@ header{background:rgba(7,8,13,0.95);border-bottom:1px solid #1e2340;padding:14px
 .hero{text-align:center;padding:40px 24px 28px;}
 .hero h1{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;background:linear-gradient(135deg,#e2e8f0,#00f5c4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px;}
 .hero p{color:#475569;font-size:0.85rem;}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;max-width:1000px;margin:0 auto;padding:0 24px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;max-width:1100px;margin:0 auto;padding:0 24px;}
 .card{background:#0d0f1a;border:1px solid #1e2340;border-radius:14px;overflow:hidden;transition:all .25s;text-decoration:none;display:block;color:inherit;}
 .card:hover{transform:translateY(-4px);border-color:#00f5c4;box-shadow:0 8px 32px rgba(0,245,196,0.1);}
-.thumb{height:150px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;}
+.thumb{height:150px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;position:relative;overflow:hidden;}
 .thumb-mr{background:linear-gradient(135deg,#1a1828,#2d1f4e);}
 .thumb-sd{background:linear-gradient(135deg,#1a0a0a,#2e1a10);}
+.thumb-fx{background:linear-gradient(135deg,#060c10,#0a1f14);}
 .thumb-soon{background:#0a0a12;border:2px dashed #1e2340;}
+.thumb-fx::after{content:'';position:absolute;bottom:0;left:0;right:0;height:40px;background:linear-gradient(transparent,rgba(0,200,150,0.08));}
 .info{padding:14px 16px;}
 .name{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;margin-bottom:4px;}
 .desc{font-size:0.75rem;color:#475569;line-height:1.5;margin-bottom:10px;}
@@ -30,8 +32,10 @@ header{background:rgba(7,8,13,0.95);border-bottom:1px solid #1e2340;padding:14px
 .tg{background:rgba(0,245,196,0.08);color:#00f5c4;border:1px solid rgba(0,245,196,0.2);}
 .tp{background:rgba(124,58,237,0.1);color:#a78bfa;border:1px solid rgba(124,58,237,0.2);}
 .ta{background:rgba(245,158,11,0.1);color:#fbbf24;border:1px solid rgba(245,158,11,0.2);}
+.tr{background:rgba(239,68,68,0.1);color:#f87171;border:1px solid rgba(239,68,68,0.2);}
 .play-btn{display:inline-flex;align-items:center;gap:6px;background:#00f5c4;color:#07080d;padding:7px 18px;border-radius:8px;font-weight:800;font-size:0.8rem;}
 .soon-btn{display:inline-flex;align-items:center;gap:6px;color:#1e2340;border:1px dashed #1e2340;padding:7px 18px;border-radius:8px;font-weight:800;font-size:0.8rem;}
+.section-label{font-family:'Syne',sans-serif;font-size:0.68rem;color:#475569;letter-spacing:4px;text-transform:uppercase;max-width:1100px;margin:32px auto 12px;padding:0 24px;}
 </style>
 </head>
 <body>
@@ -43,7 +47,9 @@ header{background:rgba(7,8,13,0.95);border-bottom:1px solid #1e2340;padding:14px
   <h1>🎮 Game Hub</h1>
   <p>All NEXUS games — free to play, earn coins, use power-ups</p>
 </div>
-<div class="grid" id="games-grid">
+
+<div class="section-label">▸ ARCADE</div>
+<div class="grid">
   <a class="card" href="merge-rush/">
     <div class="thumb thumb-mr">🔢</div>
     <div class="info">
@@ -62,11 +68,24 @@ header{background:rgba(7,8,13,0.95);border-bottom:1px solid #1e2340;padding:14px
       <div class="play-btn">▶ Play Now</div>
     </div>
   </a>
+</div>
+
+<div class="section-label">▸ TRADING & STRATEGY</div>
+<div class="grid">
+  <a class="card" href="forex-trader/">
+    <div class="thumb thumb-fx">📈</div>
+    <div class="info">
+      <div class="name">FOREX TRADER</div>
+      <div class="desc">Live candlestick charts, real spread, MA/BB/RSI indicators. Trade 7 pairs including Gold and BTC.</div>
+      <div class="tags"><span class="tag tg">Trading</span><span class="tag tr">Charts</span><span class="tag tp">Indicators</span><span class="tag ta">IAP</span></div>
+      <div class="play-btn">▶ Play Now</div>
+    </div>
+  </a>
   <div class="card" style="opacity:0.35;pointer-events:none;">
     <div class="thumb thumb-soon"><span style="color:#1e2340">?</span></div>
     <div class="info">
-      <div class="name" style="color:#374151">GAME 3</div>
-      <div class="desc" style="color:#374151">Next game dropping soon.</div>
+      <div class="name" style="color:#374151">MORE COMING</div>
+      <div class="desc" style="color:#374151">More trading games dropping soon.</div>
       <div class="tags"><span class="tag" style="color:#1e2340;border-color:#1e2340">Coming Soon</span></div>
       <div class="soon-btn">⏳ Coming Soon</div>
     </div>
