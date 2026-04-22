@@ -1,7 +1,7 @@
 {
   "profile": {
     "name": "kenrus777",
-    "title": "Software Engineer · AI/ML Developer · Game Builder",
+    "title": "Software Engineer Â· AI/ML Developer Â· Game Builder",
     "bio": "15+ years .NET development. Now building AI agents, web games, and quant trading tools.",
     "avatar": "",
     "location": "Singapore",
@@ -12,22 +12,22 @@
   "sections": {
     "games": {
       "visible": true,
-      "label": "🎮 Games",
+      "label": "ð® Games",
       "description": "Browser games with coin IAP system"
     },
     "ai_projects": {
       "visible": true,
-      "label": "🤖 AI Projects",
+      "label": "ð¤ AI Projects",
       "description": "AI/ML engineering projects"
     },
     "quant": {
       "visible": true,
-      "label": "📈 Quant & Indicators",
+      "label": "ð Quant & Indicators",
       "description": "Trading indicators and quantitative analysis"
     },
     "nexus": {
       "visible": false,
-      "label": "⚡ NEXUS Agent",
+      "label": "â¡ NEXUS Agent",
       "description": "AI automation hub"
     }
   },
@@ -38,18 +38,26 @@
       "name": "MERGE RUSH",
       "desc": "Addictive 2048-style merge puzzle with combos and power-ups",
       "url": "games/merge-rush/",
-      "tags": ["Puzzle", "Combos", "IAP"],
-      "emoji": "🔢",
+      "tags": [
+        "Puzzle",
+        "Combos",
+        "IAP"
+      ],
+      "emoji": "ð¢",
       "status": "live"
     },
     {
       "id": "stickman-dash",
       "visible": true,
       "name": "STICKMAN DASH",
-      "desc": "Endless runner with combat — jump, kick, survive",
+      "desc": "Endless runner with combat â jump, kick, survive",
       "url": "games/stickman-dash/",
-      "tags": ["Runner", "Combat", "IAP"],
-      "emoji": "🏃",
+      "tags": [
+        "Runner",
+        "Combat",
+        "IAP"
+      ],
+      "emoji": "ð",
       "status": "live"
     }
   ],
@@ -60,8 +68,12 @@
       "name": "NEXUS AI Agent Hub",
       "desc": "Autonomous agent for social media, game deploy, and IAP",
       "url": "https://github.com/kenrus777/nexus-agent",
-      "tags": ["Node.js", "Anthropic", "GitHub Actions"],
-      "emoji": "⚡",
+      "tags": [
+        "Node.js",
+        "Anthropic",
+        "GitHub Actions"
+      ],
+      "emoji": "â¡",
       "status": "live"
     },
     {
@@ -70,8 +82,12 @@
       "name": "pyOHLCpred",
       "desc": "OHLC price prediction using ML models",
       "url": "https://github.com/kenrus777/pyOHLCpred",
-      "tags": ["Python", "ML", "Finance"],
-      "emoji": "🧠",
+      "tags": [
+        "Python",
+        "ML",
+        "Finance"
+      ],
+      "emoji": "ð§ ",
       "status": "live"
     }
   ],
@@ -82,8 +98,12 @@
       "name": "PA Reversal M1",
       "desc": "MQL5 indicator detecting 4 price action reversal patterns on 1-min chart",
       "url": "",
-      "tags": ["MQL5", "MT5", "Price Action"],
-      "emoji": "📊",
+      "tags": [
+        "MQL5",
+        "MT5",
+        "Price Action"
+      ],
+      "emoji": "ð",
       "status": "private"
     }
   ]
