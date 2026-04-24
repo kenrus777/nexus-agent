@@ -1,87 +1,69 @@
 {
   "profile": {
     "name": "kenrus777",
-    "title": "Software Engineer · AI/ML Developer · Game Builder",
-    "bio": "15+ years .NET development. Now building AI agents, web games, and quant trading tools.",
-    "avatar": "",
-    "location": "Singapore",
+    "title": "Senior Software Engineer · AI/ML Developer · Game Builder",
+    "bio": "15+ years building enterprise systems in .NET/C#. Now engineering production AI — RAG pipelines, fraud detection, ML monitoring, and autonomous agents. Based in Singapore.",
+    "avatar": "👨‍💻",
+    "location": "Singapore 🇸🇬",
     "email": "",
     "github": "https://github.com/kenrus777",
     "linkedin": ""
   },
   "sections": {
-    "games": { "visible": true, "label": "🎮 Games", "description": "Browser games with coin IAP system" },
-    "ai_projects": { "visible": true, "label": "🤖 AI Projects", "description": "AI/ML engineering projects" },
-    "quant": { "visible": true, "label": "📈 Quant & Indicators", "description": "Trading indicators and quantitative analysis" },
-    "nexus": { "visible": false, "label": "⚡ NEXUS Agent", "description": "AI automation hub" }
+    "skills":      { "visible": true,  "label": "🛠️ Skills & Stack",    "description": "Technologies and tools" },
+    "ai_projects": { "visible": true,  "label": "🤖 AI Projects",        "description": "AI/ML engineering projects" },
+    "games":       { "visible": true,  "label": "🎮 Games",              "description": "Browser games with coin IAP system" },
+    "quant":       { "visible": true,  "label": "📈 Quant & Indicators", "description": "Trading indicators and quantitative analysis" },
+    "nexus":       { "visible": false, "label": "⚡ NEXUS Agent",        "description": "AI automation hub" }
+  },
+  "skills": {
+    "categories": [
+      {
+        "name": "AI / ML",
+        "color": "purple",
+        "emoji": "🧠",
+        "items": ["PyTorch","TensorFlow","Ultralytics","YOLO","scikit-learn","NumPy","pandas","Machine Learning","Deep Learning","Computer Vision","LangChain","RAG","Anthropic Claude"]
+      },
+      {
+        "name": "Data & Analytics",
+        "color": "blue",
+        "emoji": "📊",
+        "items": ["Matplotlib","Seaborn","Tableau","Power BI","Data Processing","Data Visualization","Box Plot","Analytics","Jupyter"]
+      },
+      {
+        "name": "Backend & API",
+        "color": "green",
+        "emoji": "⚙️",
+        "items": [".NET / C#","Python","FastAPI","Node.js","React","REST API","WebSocket","Frontend","Backend"]
+      },
+      {
+        "name": "Cloud & DevOps",
+        "color": "amber",
+        "emoji": "☁️",
+        "items": ["Docker","Kubernetes","Azure DevOps","Pulumi","GitHub Actions","CI/CD","Infrastructure as Code","Containers","Orchestration","Cloud"]
+      },
+      {
+        "name": "Databases",
+        "color": "red",
+        "emoji": "🗄️",
+        "items": ["PostgreSQL","Redis","ChromaDB","Supabase","SQL Server","Vector DB"]
+      }
+    ]
   },
   "games": [
-    {
-      "id": "merge-rush",
-      "visible": true,
-      "name": "MERGE RUSH",
-      "desc": "Addictive 2048-style merge puzzle with combos and power-ups",
-      "url": "games/merge-rush/",
-      "tags": ["Puzzle", "Combos", "IAP"],
-      "emoji": "🔢",
-      "status": "live"
-    },
-    {
-      "id": "stickman-dash",
-      "visible": true,
-      "name": "STICKMAN DASH",
-      "desc": "Endless runner with combat — jump, kick, survive",
-      "url": "games/stickman-dash/",
-      "tags": ["Runner", "Combat", "IAP"],
-      "emoji": "🏃",
-      "status": "live"
-    },
-    {
-      "id": "forex-trader",
-      "visible": true,
-      "name": "FOREX TRADER",
-      "desc": "Live candlestick charts, MA/BB/RSI indicators. Trade 15+ forex pairs, Gold, and Crypto.",
-      "url": "games/forex-trader/",
-      "tags": ["Trading", "Charts", "Strategy", "IAP"],
-      "emoji": "📈",
-      "status": "live"
-    }
+    { "id":"merge-rush",    "visible":true, "name":"MERGE RUSH",    "desc":"Addictive 2048-style merge puzzle with combos and power-ups",                             "url":"games/merge-rush/",    "tags":["Puzzle","Combos","IAP"],             "emoji":"🔢", "status":"live" },
+    { "id":"stickman-dash", "visible":true, "name":"STICKMAN DASH", "desc":"Endless runner with combat — jump, kick, survive",                                        "url":"games/stickman-dash/", "tags":["Runner","Combat","IAP"],             "emoji":"🏃", "status":"live" },
+    { "id":"forex-trader",  "visible":true, "name":"FOREX TRADER",  "desc":"Live candlestick charts, MA/BB/RSI. Trade 20 pairs including Gold and Crypto.",          "url":"games/forex-trader/",  "tags":["Trading","Charts","Strategy","IAP"], "emoji":"📈", "status":"live" }
   ],
   "ai_projects": [
-    {
-      "id": "nexus-agent",
-      "visible": true,
-      "name": "NEXUS AI Agent Hub",
-      "desc": "Autonomous agent for social media, game deploy, and IAP",
-      "url": "https://github.com/kenrus777/nexus-agent",
-      "tags": ["Node.js", "Anthropic", "GitHub Actions"],
-      "emoji": "⚡",
-      "status": "live"
-    },
-    {
-      "id": "pyohlcpred",
-      "visible": true,
-      "name": "pyOHLCpred",
-      "desc": "OHLC price prediction using ML models",
-      "url": "https://github.com/kenrus777/pyOHLCpred",
-      "tags": ["Python", "ML", "Finance"],
-      "emoji": "🧠",
-      "status": "live"
-    }
+    { "id":"rag-document-qa", "visible":true, "name":"RAG Document Q&A",       "desc":"Upload any PDF/DOCX and ask questions with source citations. LangChain + ChromaDB + Claude.", "url":"showcase/rag/",      "tags":["LangChain","ChromaDB","Claude","FastAPI","React"],  "emoji":"🔍", "status":"live" },
+    { "id":"fraud-detection", "visible":true, "name":"Fraud Detection Engine", "desc":"XGBoost ensemble + SHAP explainability. 98.7% AUC-ROC on Singapore fintech patterns.",     "url":"showcase/fraud/",    "tags":["XGBoost","SHAP","SMOTE","FastAPI","Python"],         "emoji":"🛡️", "status":"live" },
+    { "id":"ml-monitoring",   "visible":true, "name":"ML Model Monitor",       "desc":"PSI drift detection, performance tracking, WebSocket live feed, A/B model comparison.",    "url":"showcase/mlmonitor/","tags":["Evidently","PSI","FastAPI","React","WebSocket"],      "emoji":"📊", "status":"live" },
+    { "id":"nexus-agent",     "visible":true, "name":"NEXUS AI Agent Hub",     "desc":"Autonomous agent for social media posting, game deploy, and IAP — GitHub Actions + Anthropic.", "url":"https://github.com/kenrus777/nexus-agent", "tags":["Node.js","Anthropic","GitHub Actions"], "emoji":"⚡", "status":"live" },
+    { "id":"pyohlcpred",      "visible":true, "name":"OHLC Price Predictor",   "desc":"ML-based OHLC candlestick price prediction model for financial time series.",             "url":"https://github.com/kenrus777/pyOHLCpred", "tags":["Python","ML","Finance","pandas"],       "emoji":"🧠", "status":"live" }
   ],
   "quant": [
-    {
-      "id": "pa-reversal",
-      "visible": true,
-      "name": "PA Reversal M1",
-      "desc": "MQL5 indicator detecting 4 price action reversal patterns on 1-min chart",
-      "url": "",
-      "tags": ["MQL5", "MT5", "Price Action"],
-      "emoji": "📊",
-      "status": "private"
-    }
+    { "id":"pa-reversal", "visible":true, "name":"PA Reversal M1", "desc":"MQL5 indicator detecting 4 price action reversal patterns on 1-min chart for MT5.", "url":"", "tags":["MQL5","MT5","Price Action"], "emoji":"📊", "status":"private" }
   ],
-  "admin": {
-    "pin": "0987"
-  }
+  "admin": { "pin": "0987" }
 }
