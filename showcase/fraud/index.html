@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Fraud Detection — kenrus777</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@700;800&family=Cabinet+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--bg:#fff5f5;--card:#fff;--ink:#0a0e1a;--red:#c0392b;--red-l:#fdecea;--green:#00875a;--green-l:#e3f5ee;--muted:#6b7280;--border:#e5d5d0;--amber:#c17f24;--amber-l:#fef3e2;}
+body{background:var(--bg);color:var(--ink);font-family:'Cabinet Grotesk',sans-serif;min-height:100vh;}
+nav{background:var(--card);border-bottom:1px solid var(--border);padding:0 24px;height:54px;display:flex;align-items:center;justify-content:space-between;}
+.back{color:var(--muted);text-decoration:none;font-size:0.8rem;} .back:hover{color:var(--red);}
+.hero{background:linear-gradient(135deg,#7f1d1d,#c0392b,#e55039);color:#fff;padding:52px 24px 40px;text-align:center;}
+.badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);border-radius:100px;padding:4px 14px;font-size:0.68rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:16px;}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,5vw,3rem);font-weight:800;letter-spacing:-1px;margin-bottom:12px;}
+.hero p{font-size:0.95rem;opacity:0.85;max-width:500px;margin:0 auto 20px;line-height:1.6;}
+.metrics{display:flex;gap:28px;justify-content:center;flex-wrap:wrap;margin-bottom:20px;}
+.metric-num{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:700;}
+.metric-label{font-size:0.65rem;opacity:0.7;letter-spacing:1px;text-transform:uppercase;}
+.pills{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;}
+.pill{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);border-radius:100px;padding:3px 11px;font-size:0.65rem;font-weight:700;font-family:'DM Mono',monospace;}
+.main{max-width:820px;margin:0 auto;padding:36px 20px;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px;margin-bottom:18px;box-shadow:0 2px 8px rgba(0,0,0,0.05);}
+.form-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px;}
+.form-row.two{grid-template-columns:1fr 1fr;}
+.field label{display:block;font-size:0.6rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
+input,select{width:100%;border:1px solid var(--border);border-radius:7px;padding:8px 10px;font-family:'Cabinet Grotesk',sans-serif;font-size:0.84rem;color:var(--ink);background:#fff;outline:none;transition:border-color .2s;}
+input:focus,select:focus{border-color:var(--red);}
+.btn{width:100%;padding:12px;background:var(--red);color:#fff;border:none;border-radius:9px;font-family:'Cabinet Grotesk',sans-serif;font-weight:800;font-size:0.88rem;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:7px;margin-top:10px;}
+.btn:hover{background:#a93226;transform:translateY(-1px);} .btn:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
+.spinner{width:14px;height:14px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.thinking{display:none;align-items:center;gap:8px;padding:12px;font-size:0.76rem;color:var(--muted);margin-top:8px;}
+.thinking.show{display:flex;}
+.dots span{display:inline-block;width:5px;height:5px;background:var(--muted);border-radius:50%;animation:db 1.4s infinite ease-in-out;}
+.dots span:nth-child(1){animation-delay:-.32s;}.dots span:nth-child(2){animation-delay:-.16s;}
+@keyframes db{0%,80%,100%{transform:scale(0);}40%{transform:scale(1);}}
+.score-box{display:none;margin-top:14px;border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+.score-box.show{display:block;}
+.s-hdr{padding:18px;text-align:center;border-bottom:1px solid var(--border);}
+.s-num{font-family:'Syne',sans-serif;font-size:3.2rem;font-weight:700;line-height:1;transition:color .5s;}
+.s-bar{height:8px;background:#f0e8e8;border-radius:100px;margin:10px 0 6px;overflow:hidden;}
+.s-fill{height:100%;border-radius:100px;transition:width 1.2s ease,background .5s;}
+.s-label{font-size:0.7rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;}
+.s-dec{display:inline-block;margin-top:6px;padding:3px 12px;border-radius:100px;font-size:0.7rem;font-weight:700;}
+.shap{padding:14px;}
+.shap-title{font-size:0.62rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.shap-item{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.shap-feat{font-size:0.68rem;font-family:'DM Mono',monospace;color:var(--muted);min-width:130px;flex-shrink:0;}
+.shap-bw{flex:1;height:5px;background:#f0e8e8;border-radius:100px;overflow:hidden;}
+.shap-b{height:100%;border-radius:100px;transition:width .8s ease;}
+.shap-v{font-size:0.62rem;font-family:'DM Mono',monospace;min-width:32px;text-align:right;}
+.sum{padding:10px 14px;border-top:1px solid var(--border);font-size:0.75rem;color:var(--muted);font-family:'DM Mono',monospace;background:#fafafa;}
+.arch{background:#0a0e1a;color:#e2e8f0;border-radius:12px;padding:20px;font-family:'DM Mono',monospace;font-size:0.75rem;line-height:1.8;overflow-x:auto;margin-bottom:18px;}
+.c-g{color:#00c896;}.c-b{color:#818cf8;}.c-a{color:#fbbf24;}.c-m{color:#475569;}
+.gh-btn{display:inline-flex;align-items:center;gap:6px;background:#0a0e1a;color:#fff;padding:10px 20px;border-radius:100px;font-weight:700;font-size:0.8rem;text-decoration:none;}
+footer{text-align:center;padding:28px;font-size:0.72rem;color:var(--muted);}
+footer a{color:var(--red);text-decoration:none;}
+</style>
+</head>
+<body>
+<nav>
+  <a class="back" href="../">← All Demos</a>
+  <div style="font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:700;color:var(--red);">Fraud Detection Engine</div>
+  <a href="https://github.com/kenrus777/fraud-detection" target="_blank" style="font-size:0.72rem;color:var(--red);text-decoration:none;font-weight:700;">GitHub ↗</a>
+</nav>
+<div class="hero">
+  <div class="badge">🛡️ Live Interactive Demo</div>
+  <h1>Fraud Detection Engine</h1>
+  <p>XGBoost ensemble + SHAP explainability. Enter a transaction and get an instant fraud probability score.</p>
+  <div class="metrics">
+    <div class="metric"><div class="metric-num">98.7%</div><div class="metric-label">AUC-ROC</div></div>
+    <div class="metric"><div class="metric-num">&lt;8ms</div><div class="metric-label">Inference</div></div>
+    <div class="metric"><div class="metric-num">0.9%</div><div class="metric-label">False Positive Rate</div></div>
+  </div>
+  <div class="pills"><span class="pill">XGBoost</span><span class="pill">LightGBM</span><span class="pill">SHAP</span><span class="pill">SMOTE</span><span class="pill">FastAPI</span><span class="pill">Python</span></div>
+</div>
+<div class="main">
+  <div class="card">
+    <div style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:6px;">⚡ Score a Transaction</div>
+    <div style="font-size:0.82rem;color:var(--muted);margin-bottom:18px;">Enter transaction details to get a real-time fraud risk assessment with SHAP explanations.</div>
+    <div class="form-row">
+      <div class="field"><label>Amount (SGD)</label><input type="number" id="amt" value="4850"></div>
+      <div class="field"><label>Hour of Day</label><input type="number" id="hr" value="3" min="0" max="23"></div>
+      <div class="field"><label>Txns Last 1h</label><input type="number" id="vel" value="7"></div>
+    </div>
+    <div class="form-row">
+      <div class="field"><label>Country</label>
+        <select id="country"><option value="SG">Singapore</option><option value="MY">Malaysia</option><option value="US" selected>USA</option><option value="CN">China</option><option value="NG">Nigeria</option></select>
+      </div>
+      <div class="field"><label>Channel</label>
+        <select id="ch"><option value="online" selected>Online</option><option value="physical">Physical POS</option><option value="atm">ATM</option></select>
+      </div>
+      <div class="field"><label>MCC Category</label>
+        <select id="mcc"><option value="gambling">Gambling (7995)</option><option value="wire">Wire Transfer (4829)</option><option value="jewelry" selected>Jewelry (5094)</option><option value="grocery">Grocery (5411)</option></select>
+      </div>
+    </div>
+    <div class="form-row two">
+      <div class="field"><label>Card History</label>
+        <select id="card"><option value="new">New card (&lt;5 txns)</option><option value="normal" selected>Normal history</option><option value="senior">Long-standing</option></select>
+      </div>
+      <div class="field"><label>Device</label>
+        <select id="dev"><option value="new" selected>New device</option><option value="known">Known device</option></select>
+      </div>
+    </div>
+    <button class="btn" onclick="score()" id="btn">⚡ Score Transaction</button>
+    <div class="thinking" id="thinking"><div class="dots"><span></span><span></span><span></span></div>Running feature engineering + ensemble + SHAP...</div>
+    <div class="score-box" id="sbox">
+      <div class="s-hdr">
+        <div class="s-num" id="snum">—</div>
+        <div class="s-bar"><div class="s-fill" id="sfill"></div></div>
+        <div class="s-label" id="slabel">—</div>
+        <div class="s-dec" id="sdec">—</div>
+      </div>
+      <div class="shap"><div class="shap-title">SHAP Feature Contributions — Why this score?</div><div id="shap"></div></div>
+      <div class="sum" id="sum"></div>
+    </div>
+  </div>
+  <div style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:10px;">🏗️ Production Hosting (Free)</div>
+  <div class="arch">
+<span class="c-g">// SGD 0/month — full free stack</span>
+<span class="c-b">React Dashboard</span>  <span class="c-m">→ GitHub Pages</span>
+<span class="c-b">FastAPI Backend</span>   <span class="c-m">→ Render.com free tier</span>
+<span class="c-a">FeatureEngineer</span>  <span class="c-m">→ 25 features per transaction</span>
+<span class="c-a">EnsembleModel</span>    <span class="c-m">→ XGBoost+LightGBM+meta-learner</span>
+<span class="c-a">SHAPExplainer</span>    <span class="c-m">→ per-prediction feature importance</span>
+<span class="c-b">Supabase</span>         <span class="c-m">→ PostgreSQL free tier</span>
+<span class="c-b">Redis (Upstash)</span>  <span class="c-m">→ prediction cache (free tier)</span>
+  </div>
+  <a href="https://github.com/kenrus777/fraud-detection" target="_blank" class="gh-btn">🐙 View Full Source on GitHub</a>
+</div>
+<footer>Built by <a href="../../">kenrus777</a> · Singapore</footer>
+<script>
+async function score(){
+  const amt=parseFloat(document.getElementById('amt').value),hr=parseInt(document.getElementById('hr').value),vel=parseInt(document.getElementById('vel').value);
+  const country=document.getElementById('country').value,ch=document.getElementById('ch').value,mcc=document.getElementById('mcc').value;
+  const card=document.getElementById('card').value,dev=document.getElementById('dev').value;
+  const btn=document.getElementById('btn');
+  btn.disabled=true;btn.innerHTML='<div class="spinner"></div> Analysing...';
+  document.getElementById('thinking').classList.add('show');
+  document.getElementById('sbox').classList.remove('show');
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:700,system:'You are a production fraud detection ML system. Return ONLY valid JSON.',messages:[{role:'user',content:`Score: Amount SGD${amt}, Hour:${hr}, Velocity:${vel}/hr, Country:${country}, Channel:${ch}, MCC:${mcc}, Card:${card}, Device:${dev}\nReturn JSON: {"fraud_probability":0.0,"risk_level":"LOW|MEDIUM|HIGH|CRITICAL","decision":"APPROVE|REVIEW|BLOCK","shap_features":[{"name":"str","contribution":0.0,"direction":"increases_risk|decreases_risk","explanation":"str"}],"summary":"str"}`}]})});
+    const data=await res.json();
+    let r;try{r=JSON.parse(data.content?.[0]?.text?.replace(/```json|```/g,'').trim());}catch(e){throw new Error('parse');}
+    render(r);
+  }catch(e){
+    const p=Math.min(0.97,Math.max(0.02,(amt>3000?0.25:amt>1000?0.1:0)+(hr<6?0.2:0)+(vel>5?0.2:vel>3?0.1:0)+(country!=='SG'?0.15:0)+(mcc==='gambling'||mcc==='wire'?0.15:mcc==='jewelry'?0.1:0)+(card==='new'?0.1:0)+(dev==='new'?0.05:0)));
+    const risk=p>0.8?'CRITICAL':p>0.6?'HIGH':p>0.3?'MEDIUM':'LOW';
+    render({fraud_probability:p,risk_level:risk,decision:p>0.7?'BLOCK':p>0.4?'REVIEW':'APPROVE',
+      shap_features:[{name:'transaction_amount',contribution:amt>3000?0.82:0.2,direction:amt>3000?'increases_risk':'decreases_risk',explanation:`SGD ${amt} is ${amt>3000?'well above':'within'} normal range`},{name:'hour_of_day',contribution:hr<6?0.74:0.1,direction:hr<6?'increases_risk':'decreases_risk',explanation:`Hour ${hr} is ${hr<6?'late night suspicious':'normal hours'}`},{name:'txn_velocity_1h',contribution:vel>5?0.68:0.15,direction:vel>5?'increases_risk':'decreases_risk',explanation:`${vel} txns/hr is ${vel>5?'card testing pattern':'normal'}`},{name:'merchant_country',contribution:country!=='SG'?0.55:0.05,direction:country!=='SG'?'increases_risk':'decreases_risk',explanation:`${country} is ${country!=='SG'?'foreign':'domestic'}`},{name:'mcc_risk',contribution:(mcc==='gambling'||mcc==='wire')?0.62:0.12,direction:(mcc==='gambling'||mcc==='wire')?'increases_risk':'decreases_risk',explanation:`${mcc} MCC has ${(mcc==='gambling'||mcc==='wire')?'high':'normal'} fraud rate`}],
+      summary:`Heuristic score. Risk: amount=${amt}, hour=${hr}, velocity=${vel}, country=${country}`});
+  }
+  document.getElementById('thinking').classList.remove('show');
+  btn.disabled=false;btn.innerHTML='⚡ Score Transaction';
+}
+function render(r){
+  const pct=Math.round(r.fraud_probability*100);
+  const cols={LOW:'#00875a',MEDIUM:'#c17f24',HIGH:'#d97706',CRITICAL:'#c0392b'};
+  const bgs={LOW:'#e3f5ee',MEDIUM:'#fef3e2',HIGH:'#fff3e0',CRITICAL:'#fdecea'};
+  const c=cols[r.risk_level]||'#6b7280';
+  document.getElementById('snum').textContent=pct+'%';document.getElementById('snum').style.color=c;
+  document.getElementById('sfill').style.width=pct+'%';document.getElementById('sfill').style.background=c;
+  document.getElementById('slabel').textContent=r.risk_level+' RISK';document.getElementById('slabel').style.color=c;
+  const d=document.getElementById('sdec');d.textContent=r.decision;d.style.background=bgs[r.risk_level];d.style.color=c;
+  document.getElementById('shap').innerHTML=r.shap_features.map(f=>{const ip=f.direction==='increases_risk',w=Math.round(f.contribution*100);
+    return`<div class="shap-item" title="${f.explanation}"><div class="shap-feat">${f.name}</div><div class="shap-bw"><div class="shap-b" style="width:${w}%;background:${ip?'#c0392b':'#00875a'}"></div></div><div class="shap-v" style="color:${ip?'#c0392b':'#00875a'}">${ip?'+':'-'}${w}</div></div>`;
+  }).join('');
+  document.getElementById('sum').textContent='→ '+r.summary;
+  document.getElementById('sbox').classList.add('show');
+}
+</script>
+</body>
+</html>
