@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live Demos — kenrus777</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#07080d;color:#e2e8f0;font-family:'Syne',sans-serif;min-height:100vh;padding-bottom:60px;}
+header{background:rgba(7,8,13,0.95);border-bottom:1px solid #1e2340;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;color:#00f5c4;letter-spacing:3px;}
+.back{color:#475569;font-size:0.8rem;text-decoration:none;padding:6px 14px;border:1px solid #1e2340;border-radius:8px;}
+.back:hover{color:#00f5c4;border-color:#00f5c4;}
+.hero{text-align:center;padding:48px 24px 36px;}
+.hero h1{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;background:linear-gradient(135deg,#e2e8f0,#00f5c4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px;}
+.hero p{color:#475569;font-size:0.85rem;max-width:500px;margin:0 auto;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;max-width:1000px;margin:0 auto;padding:0 24px;}
+.card{background:#0d0f1a;border:1px solid #1e2340;border-radius:16px;overflow:hidden;text-decoration:none;display:block;color:inherit;transition:all .25s;}
+.card:hover{transform:translateY(-4px);box-shadow:0 8px 32px rgba(0,245,196,0.1);}
+.thumb{height:140px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;position:relative;}
+.thumb-rag{background:linear-gradient(135deg,#0d1a3a,#1a2e5a);}
+.thumb-fraud{background:linear-gradient(135deg,#2a0a0a,#4a1515);}
+.thumb-mon{background:linear-gradient(135deg,#1a1200,#2e2000);}
+.info{padding:16px;}
+.name{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;margin-bottom:6px;}
+.desc{font-size:0.75rem;color:#475569;line-height:1.5;margin-bottom:12px;}
+.stack{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;}
+.st{background:#1e2340;color:#64748b;padding:2px 8px;border-radius:8px;font-size:0.6rem;font-family:'Space Mono',monospace;}
+.play-btn{display:inline-flex;align-items:center;gap:6px;background:#00f5c4;color:#07080d;padding:7px 16px;border-radius:8px;font-weight:800;font-size:0.78rem;}
+.card:hover .play-btn{background:#00ddb0;}
+.note{background:#0d0f1a;border:1px solid #1e2340;border-radius:10px;padding:14px 16px;margin:24px auto;max-width:640px;font-size:0.78rem;color:#475569;text-align:center;line-height:1.6;}
+.note span{color:#fbbf24;}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">NEXUS // DEMOS</div>
+  <a class="back" href="../">← Portfolio</a>
+</header>
+<div class="hero">
+  <h1>🚀 Live Interactive Demos</h1>
+  <p>Real AI running in your browser — enter data, get real responses powered by Claude.</p>
+</div>
+<div class="note"><span>⚡ How these work:</span> Each demo calls the Anthropic API directly from your browser. No backend needed for the demos. The full production systems (FastAPI + ChromaDB + PostgreSQL) run on Render.com — see each project's GitHub for deployment.</div>
+<div class="grid">
+  <a class="card" href="rag/">
+    <div class="thumb thumb-rag">🔍</div>
+    <div class="info">
+      <div class="name">RAG Document Q&A</div>
+      <div class="desc">Paste any document, ask questions, get cited answers. No hallucination — grounded only in your content.</div>
+      <div class="stack"><span class="st">LangChain</span><span class="st">ChromaDB</span><span class="st">Claude</span><span class="st">FastAPI</span></div>
+      <div class="play-btn">🔍 Try Demo</div>
+    </div>
+  </a>
+  <a class="card" href="fraud/">
+    <div class="thumb thumb-fraud">🛡️</div>
+    <div class="info">
+      <div class="name">Fraud Detection Engine</div>
+      <div class="desc">Enter a transaction — get fraud probability + SHAP feature explanations. 98.7% AUC-ROC.</div>
+      <div class="stack"><span class="st">XGBoost</span><span class="st">SHAP</span><span class="st">SMOTE</span><span class="st">FastAPI</span></div>
+      <div class="play-btn">⚡ Score Transaction</div>
+    </div>
+  </a>
+  <a class="card" href="mlmonitor/">
+    <div class="thumb thumb-mon">📊</div>
+    <div class="info">
+      <div class="name">ML Model Monitor</div>
+      <div class="desc">Run a drift analysis — PSI per feature, KS statistics, retraining recommendation.</div>
+      <div class="stack"><span class="st">Evidently</span><span class="st">PSI</span><span class="st">FastAPI</span><span class="st">WebSocket</span></div>
+      <div class="play-btn">📊 Run Analysis</div>
+    </div>
+  </a>
+</div>
+</body>
+</html>
