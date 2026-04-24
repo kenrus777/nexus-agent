@@ -3,79 +3,100 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>kenrus777 — Portfolio</title>
+<title>kenrus777 — AI Engineer Portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:#07080d;color:#e2e8f0;font-family:'Syne',sans-serif;min-height:100vh;}
 body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,245,196,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,245,196,0.025) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;}
 .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;position:relative;text-align:center;}
-.hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(0,245,196,0.06) 0%,transparent 70%);pointer-events:none;}
-.avatar-ring{width:100px;height:100px;border-radius:50%;border:2px solid #00f5c4;display:flex;align-items:center;justify-content:center;font-size:2.5rem;margin:0 auto 24px;box-shadow:0 0 40px rgba(0,245,196,0.15);background:#0d0f1a;position:relative;}
-.online-dot{position:absolute;bottom:4px;right:4px;width:14px;height:14px;background:#00f5c4;border-radius:50%;border:2px solid #07080d;box-shadow:0 0 8px #00f5c4;animation:pulse 2s infinite;}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
-.name{font-size:2.8rem;font-weight:800;letter-spacing:-1px;margin-bottom:8px;}
+.hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(0,245,196,0.05) 0%,transparent 70%);pointer-events:none;}
+.avatar-ring{width:90px;height:90px;border-radius:50%;border:2px solid #00f5c4;display:flex;align-items:center;justify-content:center;font-size:2.2rem;margin:0 auto 20px;box-shadow:0 0 40px rgba(0,245,196,0.12);background:#0d0f1a;position:relative;}
+.online-dot{position:absolute;bottom:4px;right:4px;width:13px;height:13px;background:#00f5c4;border-radius:50%;border:2px solid #07080d;box-shadow:0 0 8px #00f5c4;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.name{font-size:2.6rem;font-weight:800;letter-spacing:-1px;margin-bottom:6px;}
 .name span{color:#00f5c4;}
-.title{font-size:0.9rem;color:#475569;font-family:'Space Mono',monospace;letter-spacing:2px;margin-bottom:16px;}
-.bio{max-width:520px;color:#64748b;font-size:0.9rem;line-height:1.7;margin-bottom:32px;}
-.links{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:48px;}
-.link-btn{padding:8px 20px;border-radius:8px;font-size:0.8rem;font-weight:700;text-decoration:none;transition:all .2s;display:flex;align-items:center;gap:6px;}
+.title{font-size:0.82rem;color:#475569;font-family:'Space Mono',monospace;letter-spacing:2px;margin-bottom:14px;}
+.bio{max-width:540px;color:#64748b;font-size:0.88rem;line-height:1.7;margin-bottom:12px;}
+.location{font-size:0.72rem;color:#374151;margin-bottom:28px;font-family:'Space Mono',monospace;}
+.links{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:48px;}
+.link-btn{padding:8px 18px;border-radius:8px;font-size:0.78rem;font-weight:700;text-decoration:none;transition:all .2s;display:flex;align-items:center;gap:5px;}
 .link-btn.primary{background:#00f5c4;color:#07080d;}
-.link-btn.primary:hover{background:#00ddb0;box-shadow:0 4px 20px rgba(0,245,196,0.3);}
+.link-btn.primary:hover{background:#00ddb0;transform:translateY(-1px);}
 .link-btn.secondary{background:transparent;border:1px solid #1e2340;color:#64748b;}
 .link-btn.secondary:hover{border-color:#00f5c4;color:#00f5c4;}
-.scroll-hint{color:#1e2340;font-size:0.75rem;font-family:'Space Mono',monospace;letter-spacing:2px;animation:bounce 2s infinite;}
+.scroll-hint{color:#1e2340;font-size:0.7rem;font-family:'Space Mono',monospace;letter-spacing:2px;animation:bounce 2s infinite;}
 @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
 main{max-width:1000px;margin:0 auto;padding:0 24px 80px;}
-.section{margin-bottom:64px;}
-.section-header{display:flex;align-items:center;gap:12px;margin-bottom:24px;}
-.section-icon{font-size:1.4rem;}
-.section-title{font-size:1.3rem;font-weight:800;}
-.section-count{background:#1e2340;color:#475569;font-size:0.65rem;padding:2px 8px;border-radius:10px;font-family:'Space Mono',monospace;}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;}
-.card{background:#0d0f1a;border:1px solid #1e2340;border-radius:14px;overflow:hidden;transition:all .25s;text-decoration:none;display:block;color:inherit;}
-.card:hover{transform:translateY(-3px);border-color:#00f5c4;box-shadow:0 8px 32px rgba(0,245,196,0.08);}
-.card-thumb{height:120px;display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative;}
-.card-body{padding:14px 16px;}
-.card-name{font-weight:800;font-size:0.95rem;margin-bottom:4px;display:flex;align-items:center;gap:8px;}
-.card-desc{font-size:0.75rem;color:#475569;line-height:1.5;margin-bottom:10px;}
-.card-tags{display:flex;gap:6px;flex-wrap:wrap;}
-.tag{font-size:0.58rem;padding:2px 7px;border-radius:10px;font-family:'Space Mono',monospace;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;}
+.section{margin-bottom:60px;}
+.section-header{display:flex;align-items:center;gap:10px;margin-bottom:18px;padding-bottom:10px;border-bottom:1px solid #1e2340;}
+.section-icon{font-size:1.2rem;}
+.section-title{font-size:1.1rem;font-weight:800;}
+.section-count{background:#1e2340;color:#475569;font-size:0.6rem;padding:2px 7px;border-radius:8px;font-family:'Space Mono',monospace;}
+
+/* SKILLS */
+.skills-grid{display:flex;flex-direction:column;gap:12px;}
+.skill-cat{background:#0d0f1a;border:1px solid #1e2340;border-radius:12px;padding:14px 16px;}
+.cat-header{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+.cat-emoji{font-size:1rem;}
+.cat-name{font-size:0.68rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;}
+.cat-name.purple{color:#a78bfa;}.cat-name.blue{color:#818cf8;}.cat-name.green{color:#00f5c4;}.cat-name.amber{color:#fbbf24;}.cat-name.red{color:#f87171;}
+.skill-pills{display:flex;flex-wrap:wrap;gap:6px;}
+.skill-pill{padding:3px 10px;border-radius:100px;font-size:0.65rem;font-weight:700;font-family:'Space Mono',monospace;border:1px solid;transition:all .2s;cursor:default;}
+.skill-pill.purple{background:rgba(124,58,237,0.1);color:#a78bfa;border-color:rgba(124,58,237,0.25);}
+.skill-pill.blue{background:rgba(129,140,248,0.1);color:#818cf8;border-color:rgba(129,140,248,0.25);}
+.skill-pill.green{background:rgba(0,245,196,0.08);color:#00f5c4;border-color:rgba(0,245,196,0.2);}
+.skill-pill.amber{background:rgba(251,191,36,0.1);color:#fbbf24;border-color:rgba(251,191,36,0.25);}
+.skill-pill.red{background:rgba(248,113,113,0.1);color:#f87171;border-color:rgba(248,113,113,0.25);}
+.skill-pill:hover{transform:translateY(-1px);}
+
+/* CARDS */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;}
+.card{background:#0d0f1a;border:1px solid #1e2340;border-radius:12px;overflow:hidden;transition:all .25s;text-decoration:none;display:block;color:inherit;}
+.card:hover{transform:translateY(-3px);border-color:#00f5c4;box-shadow:0 8px 32px rgba(0,245,196,0.07);}
+.card-thumb{height:100px;display:flex;align-items:center;justify-content:center;font-size:2.8rem;}
+.card-body{padding:12px 14px;}
+.card-name{font-weight:800;font-size:0.9rem;margin-bottom:4px;display:flex;align-items:center;gap:7px;}
+.card-desc{font-size:0.72rem;color:#475569;line-height:1.5;margin-bottom:10px;}
+.card-tags{display:flex;gap:5px;flex-wrap:wrap;}
+.tag{font-size:0.56rem;padding:2px 7px;border-radius:8px;font-family:'Space Mono',monospace;font-weight:700;text-transform:uppercase;}
 .tag-green{background:rgba(0,245,196,0.08);color:#00f5c4;border:1px solid rgba(0,245,196,0.2);}
 .tag-purple{background:rgba(124,58,237,0.1);color:#a78bfa;border:1px solid rgba(124,58,237,0.2);}
-.tag-amber{background:rgba(245,158,11,0.1);color:#fbbf24;border:1px solid rgba(245,158,11,0.2);}
+.tag-amber{background:rgba(251,191,36,0.1);color:#fbbf24;border:1px solid rgba(251,191,36,0.2);}
 .tag-gray{background:#1e2340;color:#64748b;border:1px solid #1e2340;}
-.status-dot{width:7px;height:7px;border-radius:50%;display:inline-block;}
+.status-dot{width:7px;height:7px;border-radius:50%;}
 .dot-live{background:#00f5c4;box-shadow:0 0 6px #00f5c4;}
-.dot-private{background:#fbbf24;}
-.dot-wip{background:#a78bfa;}
-.view-all{display:inline-flex;align-items:center;gap:6px;color:#00f5c4;font-size:0.8rem;font-weight:700;text-decoration:none;margin-top:16px;padding:8px 16px;border:1px solid rgba(0,245,196,0.2);border-radius:8px;transition:all .2s;}
+.dot-private{background:#fbbf24;}.dot-wip{background:#a78bfa;}
+.view-all{display:inline-flex;align-items:center;gap:5px;color:#00f5c4;font-size:0.75rem;font-weight:700;text-decoration:none;margin-top:14px;padding:7px 14px;border:1px solid rgba(0,245,196,0.2);border-radius:8px;transition:all .2s;}
 .view-all:hover{background:rgba(0,245,196,0.06);}
-.admin-fab{position:fixed;bottom:24px;right:24px;width:44px;height:44px;background:#0d0f1a;border:1px solid #1e2340;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:1.1rem;transition:all .2s;z-index:50;}
-.admin-fab:hover{border-color:#00f5c4;box-shadow:0 0 20px rgba(0,245,196,0.15);}
-.divider{border:none;border-top:1px solid #1e2340;margin:8px 0 24px;}
+.admin-fab{position:fixed;bottom:24px;right:24px;width:42px;height:42px;background:#0d0f1a;border:1px solid #1e2340;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:1rem;transition:all .2s;z-index:50;}
+.admin-fab:hover{border-color:#00f5c4;}
+.divider{border:none;border-top:1px solid #1e2340;margin:8px 0 18px;}
 </style>
 </head>
 <body>
 
 <div class="hero">
   <div class="avatar-ring">
-    <span id="avatar-emoji">🧑‍💻</span>
+    <span id="avatar-emoji">👨‍💻</span>
     <div class="online-dot"></div>
   </div>
   <div class="name">ken<span>rus777</span></div>
   <div class="title" id="profile-title">Loading...</div>
   <div class="bio" id="profile-bio"></div>
+  <div class="location" id="profile-location"></div>
   <div class="links">
     <a class="link-btn primary" href="https://github.com/kenrus777" target="_blank">🐙 GitHub</a>
+    <a class="link-btn secondary" href="showcase/">🚀 Live Demos</a>
+    <a class="link-btn secondary" href="games/">🎮 Games</a>
     <a class="link-btn secondary" id="linkedin-link" href="#" style="display:none">💼 LinkedIn</a>
     <a class="link-btn secondary" href="admin/">⚙️ Admin</a>
   </div>
-  <div class="scroll-hint">↓ &nbsp; scroll to explore &nbsp; ↓</div>
+  <div class="scroll-hint">↓ scroll to explore ↓</div>
 </div>
 
 <main id="main-content">
-  <div id="loading" style="text-align:center;color:#1e2340;padding:40px;font-family:'Space Mono',monospace;">Loading portfolio...</div>
+  <div style="text-align:center;color:#1e2340;padding:40px;font-family:'Space Mono',monospace;">Loading...</div>
 </main>
 
 <a class="admin-fab" href="admin/" title="Admin Panel">⚙️</a>
@@ -84,121 +105,100 @@ main{max-width:1000px;margin:0 auto;padding:0 24px 80px;}
 async function loadConfig() {
   let config;
   try {
-    // Check for local draft first (admin changes)
     const draft = localStorage.getItem('nexus_config_draft');
     if (draft) { config = JSON.parse(draft); }
-    else {
-      const res = await fetch('admin/config.json?t=' + Date.now());
-      config = await res.json();
-    }
-  } catch(e) {
-    document.getElementById('loading').textContent = 'Could not load config.';
-    return;
-  }
+    else { const res = await fetch('admin/config.json?t=' + Date.now()); config = await res.json(); }
+  } catch(e) { document.getElementById('main-content').innerHTML = '<div style="text-align:center;color:#1e2340;padding:40px;font-family:Space Mono,monospace;">Could not load config.json</div>'; return; }
   renderProfile(config);
-  renderSections(config);
+  renderAll(config);
 }
 
 function renderProfile(config) {
   const p = config.profile || {};
-  document.title = `${p.name || 'kenrus777'} — Portfolio`;
-  document.getElementById('profile-title').textContent = p.title || 'Developer';
+  document.title = `${p.name||'kenrus777'} — Portfolio`;
+  document.getElementById('profile-title').textContent = p.title || '';
   document.getElementById('profile-bio').textContent = p.bio || '';
-  if (p.linkedin) {
-    const el = document.getElementById('linkedin-link');
-    el.href = p.linkedin; el.style.display = 'flex';
-  }
+  document.getElementById('profile-location').textContent = p.location ? '📍 ' + p.location : '';
+  if (p.linkedin) { const el=document.getElementById('linkedin-link'); el.href=p.linkedin; el.style.display='flex'; }
   if (p.avatar) document.getElementById('avatar-emoji').textContent = p.avatar;
 }
 
-function renderSections(config) {
+function renderAll(config) {
   const main = document.getElementById('main-content');
   main.innerHTML = '';
-  const sections = config.sections || {};
+  const s = config.sections || {};
 
-  // GAMES
-  if (sections.games?.visible) {
-    const games = (config.games || []).filter(g => g.visible);
-    if (games.length) {
-      main.appendChild(buildSection({
-        icon: '🎮', title: 'Games', count: games.length,
-        items: games.map(g => ({
-          emoji: g.emoji, name: g.name, desc: g.desc,
-          tags: g.tags, status: g.status, url: g.url,
-          bg: 'linear-gradient(135deg,#1a1828,#2d1f4e)'
-        })),
-        viewAll: 'games/', viewAllLabel: 'All Games →'
-      }));
-    }
+  if (s.skills?.visible && config.skills?.categories?.length) main.appendChild(buildSkills(config.skills.categories));
+
+  if (s.ai_projects?.visible) {
+    const items = (config.ai_projects||[]).filter(i=>i.visible);
+    if (items.length) main.appendChild(buildSection({ icon:'🤖', title:'AI Projects', count:items.length,
+      items: items.map(i=>({emoji:i.emoji,name:i.name,desc:i.desc,tags:i.tags,status:i.status,url:i.url,bg:'linear-gradient(135deg,#0f1a0f,#1a2e2a)'}))
+    }));
   }
 
-  // AI PROJECTS
-  if (sections.ai_projects?.visible) {
-    const items = (config.ai_projects || []).filter(i => i.visible);
-    if (items.length) {
-      main.appendChild(buildSection({
-        icon: '🤖', title: 'AI Projects', count: items.length,
-        items: items.map(i => ({
-          emoji: i.emoji, name: i.name, desc: i.desc,
-          tags: i.tags, status: i.status, url: i.url,
-          bg: 'linear-gradient(135deg,#0f1a0f,#1a2e2a)'
-        }))
-      }));
-    }
+  if (s.games?.visible) {
+    const games = (config.games||[]).filter(g=>g.visible);
+    if (games.length) main.appendChild(buildSection({ icon:'🎮', title:'Games', count:games.length,
+      viewAll:'games/', viewAllLabel:'All Games →',
+      items: games.map(g=>({emoji:g.emoji,name:g.name,desc:g.desc,tags:g.tags,status:g.status,url:g.url,bg:'linear-gradient(135deg,#1a1828,#2d1f4e)'}))
+    }));
   }
 
-  // QUANT
-  if (sections.quant?.visible) {
-    const items = (config.quant || []).filter(i => i.visible);
-    if (items.length) {
-      main.appendChild(buildSection({
-        icon: '📈', title: 'Quant & Indicators', count: items.length,
-        items: items.map(i => ({
-          emoji: i.emoji, name: i.name, desc: i.desc,
-          tags: i.tags, status: i.status, url: i.url,
-          bg: 'linear-gradient(135deg,#0f1a12,#1a2e1f)'
-        }))
-      }));
-    }
+  if (s.quant?.visible) {
+    const items = (config.quant||[]).filter(i=>i.visible);
+    if (items.length) main.appendChild(buildSection({ icon:'📈', title:'Quant & Indicators', count:items.length,
+      items: items.map(i=>({emoji:i.emoji,name:i.name,desc:i.desc,tags:i.tags,status:i.status,url:i.url,bg:'linear-gradient(135deg,#0f1a12,#1a2e1f)'}))
+    }));
   }
 
-  if (!main.innerHTML) main.innerHTML = '<div style="text-align:center;color:#1e2340;padding:60px;font-family:Space Mono,monospace;">No sections visible. Enable them in admin panel.</div>';
+  if (!main.innerHTML) main.innerHTML = '<div style="text-align:center;color:#1e2340;padding:60px;font-family:Space Mono,monospace;">No sections visible. Enable in admin.</div>';
 }
 
-function buildSection({ icon, title, count, items, viewAll, viewAllLabel }) {
+function buildSkills(categories) {
   const sec = document.createElement('div');
   sec.className = 'section';
   sec.innerHTML = `
-    <div class="section-header">
-      <span class="section-icon">${icon}</span>
-      <span class="section-title">${title}</span>
-      <span class="section-count">${count}</span>
-    </div>
-    <hr class="divider">
-    <div class="grid">${items.map(item => buildCard(item)).join('')}</div>
-    ${viewAll ? `<a class="view-all" href="${viewAll}">${viewAllLabel||'View All →'}</a>` : ''}
-  `;
+    <div class="section-header"><span class="section-icon">🛠️</span><span class="section-title">Skills & Stack</span><span class="section-count">${categories.reduce((s,c)=>s+c.items.length,0)} skills</span></div>
+    <div class="skills-grid">${categories.map(cat=>`
+      <div class="skill-cat">
+        <div class="cat-header"><span class="cat-emoji">${cat.emoji}</span><span class="cat-name ${cat.color||'green'}">${cat.name}</span></div>
+        <div class="skill-pills">${cat.items.map(item=>`<span class="skill-pill ${cat.color||'green'}">${item}</span>`).join('')}</div>
+      </div>`).join('')}
+    </div>`;
   return sec;
 }
 
-function buildCard({ emoji, name, desc, tags, status, url, bg }) {
-  const tagColors = { 'Puzzle':'tag-green','Combos':'tag-purple','IAP':'tag-amber','Runner':'tag-green','Combat':'tag-purple','Node.js':'tag-green','ML':'tag-purple','Python':'tag-green','Finance':'tag-amber','MQL5':'tag-amber','MT5':'tag-purple','Price Action':'tag-green','Anthropic':'tag-purple','GitHub Actions':'tag-gray' };
+function buildSection({ icon, title, count, items, viewAll, viewAllLabel }) {
+  const tagColors = {
+    'Puzzle':'tag-green','Combos':'tag-purple','IAP':'tag-amber','Runner':'tag-green','Combat':'tag-purple',
+    'Trading':'tag-green','Charts':'tag-purple','Strategy':'tag-amber','LangChain':'tag-green',
+    'ChromaDB':'tag-purple','Claude':'tag-amber','FastAPI':'tag-green','Python':'tag-green',
+    'React':'tag-purple','XGBoost':'tag-green','SHAP':'tag-purple','SMOTE':'tag-amber',
+    'Node.js':'tag-green','Anthropic':'tag-purple','GitHub Actions':'tag-gray',
+    'ML':'tag-purple','Finance':'tag-amber','pandas':'tag-green',
+    'MQL5':'tag-amber','MT5':'tag-purple','Price Action':'tag-green',
+    'Evidently':'tag-amber','PSI':'tag-green','WebSocket':'tag-purple',
+  };
   const statusMap = { live:'dot-live', private:'dot-private', wip:'dot-wip' };
-  const tagHtml = (tags||[]).map(t => `<span class="tag ${tagColors[t]||'tag-gray'}">${t}</span>`).join('');
-  const href = url ? (url.startsWith('http') ? url : url) : '#';
-  const target = url?.startsWith('http') ? 'target="_blank"' : '';
-  return `
-    <a class="card" href="${href}" ${target}>
-      <div class="card-thumb" style="background:${bg}">${emoji}</div>
-      <div class="card-body">
-        <div class="card-name">
-          <span class="status-dot ${statusMap[status]||'dot-live'}"></span>
-          ${name}
+  const sec = document.createElement('div');
+  sec.className = 'section';
+  sec.innerHTML = `
+    <div class="section-header"><span class="section-icon">${icon}</span><span class="section-title">${title}</span><span class="section-count">${count}</span></div>
+    <hr class="divider">
+    <div class="grid">${items.map(item=>{
+      const href=item.url||'#'; const target=item.url?.startsWith('http')?'target="_blank"':'';
+      return `<a class="card" href="${href}" ${target}>
+        <div class="card-thumb" style="background:${item.bg}">${item.emoji}</div>
+        <div class="card-body">
+          <div class="card-name"><span class="status-dot ${statusMap[item.status]||'dot-live'}"></span>${item.name}</div>
+          <div class="card-desc">${item.desc}</div>
+          <div class="card-tags">${(item.tags||[]).map(t=>`<span class="tag ${tagColors[t]||'tag-gray'}">${t}</span>`).join('')}</div>
         </div>
-        <div class="card-desc">${desc}</div>
-        <div class="card-tags">${tagHtml}</div>
-      </div>
-    </a>`;
+      </a>`;
+    }).join('')}</div>
+    ${viewAll?`<a class="view-all" href="${viewAll}">${viewAllLabel||'View All →'}</a>`:''}`;
+  return sec;
 }
 
 loadConfig();
