@@ -9,7 +9,7 @@
 :root{--bg:#f0f4ff;--card:#fff;--ink:#0a0e1a;--blue:#1a4fd6;--blue-l:#e8eeff;--muted:#6b7280;--border:#dde3f0;--green:#00875a;--amber:#c17f24;}
 body{background:var(--bg);color:var(--ink);font-family:'Cabinet Grotesk',sans-serif;min-height:100vh;}
 nav{background:var(--card);border-bottom:1px solid var(--border);padding:0 24px;height:54px;display:flex;align-items:center;justify-content:space-between;}
-.back{color:var(--muted);text-decoration:none;font-size:0.8rem;} .back:hover{color:var(--blue);}
+.back{color:var(--muted);text-decoration:none;font-size:0.8rem;}.back:hover{color:var(--blue);}
 .hero{background:linear-gradient(135deg,#1a4fd6,#5b21b6);color:#fff;padding:52px 24px 40px;text-align:center;}
 .badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);border-radius:100px;padding:4px 14px;font-size:0.68rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:16px;}
 .hero h1{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,5vw,3rem);font-weight:800;letter-spacing:-1px;margin-bottom:12px;}
@@ -18,14 +18,14 @@ nav{background:var(--card);border-bottom:1px solid var(--border);padding:0 24px;
 .pill{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);border-radius:100px;padding:3px 11px;font-size:0.65rem;font-weight:700;font-family:'DM Mono',monospace;}
 .main{max-width:820px;margin:0 auto;padding:36px 20px;}
 .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px;margin-bottom:18px;box-shadow:0 2px 8px rgba(0,0,0,0.05);}
-.card-title{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:6px;}
-.card-sub{font-size:0.82rem;color:var(--muted);margin-bottom:18px;line-height:1.5;}
 .field{margin-bottom:12px;}
 .field label{display:block;font-size:0.62rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:5px;}
 textarea,input[type=text]{width:100%;border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-family:'Cabinet Grotesk',sans-serif;font-size:0.84rem;color:var(--ink);background:#fff;outline:none;transition:border-color .2s;}
-textarea{resize:vertical;min-height:110px;line-height:1.5;} textarea:focus,input:focus{border-color:var(--blue);}
+textarea{resize:vertical;min-height:110px;line-height:1.5;}textarea:focus,input:focus{border-color:var(--blue);}
 .btn{width:100%;padding:12px;background:var(--blue);color:#fff;border:none;border-radius:9px;font-family:'Cabinet Grotesk',sans-serif;font-weight:800;font-size:0.88rem;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:7px;margin-top:4px;}
-.btn:hover{background:#1240b8;transform:translateY(-1px);} .btn:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
+.btn:hover{background:#1240b8;transform:translateY(-1px);}.btn:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
+.btn-upload{background:var(--green);margin-bottom:8px;}
+.btn-upload:hover{background:#00714b;}
 .spinner{width:14px;height:14px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg);}}
 .thinking{display:none;align-items:center;gap:8px;padding:12px;font-size:0.76rem;color:var(--muted);margin-top:8px;}
@@ -39,16 +39,25 @@ textarea{resize:vertical;min-height:110px;line-height:1.5;} textarea:focus,input
 .r-body{padding:14px;font-size:0.86rem;line-height:1.7;white-space:pre-wrap;}
 .sources{display:flex;flex-wrap:wrap;gap:5px;padding:10px 14px;border-top:1px solid var(--border);background:#fafafa;}
 .src{background:var(--blue-l);color:var(--blue);border:1px solid #c0d0f8;border-radius:100px;padding:2px 9px;font-size:0.6rem;font-weight:700;font-family:'DM Mono',monospace;}
-.steps{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-bottom:18px;}
-.step{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center;}
-.step-n{width:28px;height:28px;background:var(--blue-l);color:var(--blue);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.82rem;margin:0 auto 8px;}
-.step-t{font-size:0.78rem;font-weight:700;margin-bottom:3px;}
-.step-d{font-size:0.65rem;color:var(--muted);line-height:1.4;}
+.status-bar{background:#0a0e1a;color:#00f5c4;padding:10px 14px;border-radius:8px;font-family:'DM Mono',monospace;font-size:0.72rem;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.status-dot{width:8px;height:8px;border-radius:50%;background:#00f5c4;box-shadow:0 0 6px #00f5c4;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.status-bar.error{color:#f87171;}
+.status-bar.error .status-dot{background:#f87171;box-shadow:0 0 6px #f87171;}
+.steps{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-bottom:18px;}
+.step{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center;}
+.step-n{width:26px;height:26px;background:var(--blue-l);color:var(--blue);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.8rem;margin:0 auto 7px;}
+.step-t{font-size:0.76rem;font-weight:700;margin-bottom:2px;}
+.step-d{font-size:0.62rem;color:var(--muted);line-height:1.4;}
 .arch{background:#0a0e1a;color:#e2e8f0;border-radius:12px;padding:20px;font-family:'DM Mono',monospace;font-size:0.75rem;line-height:1.8;margin-bottom:18px;overflow-x:auto;}
 .c-g{color:#00c896;}.c-b{color:#818cf8;}.c-a{color:#fbbf24;}.c-m{color:#475569;}
 .gh-btn{display:inline-flex;align-items:center;gap:6px;background:#0a0e1a;color:#fff;padding:10px 20px;border-radius:100px;font-weight:700;font-size:0.8rem;text-decoration:none;}
 footer{text-align:center;padding:28px;font-size:0.72rem;color:var(--muted);}
 footer a{color:var(--blue);text-decoration:none;}
+.doc-list{margin-top:10px;}
+.doc-item{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:#fafafa;border:1px solid var(--border);border-radius:8px;margin-bottom:6px;font-size:0.78rem;}
+.doc-del{background:transparent;border:1px solid var(--border);color:var(--muted);padding:2px 8px;border-radius:5px;cursor:pointer;font-size:0.62rem;font-family:'DM Mono',monospace;}
+.doc-del:hover{border-color:#c0392b;color:#c0392b;}
 </style>
 </head>
 <body>
@@ -58,76 +67,174 @@ footer a{color:var(--blue);text-decoration:none;}
   <a href="https://github.com/kenrus777/rag-document-qa" target="_blank" style="font-size:0.72rem;color:var(--blue);text-decoration:none;font-weight:700;">GitHub ↗</a>
 </nav>
 <div class="hero">
-  <div class="badge">🔍 Live Interactive Demo</div>
+  <div class="badge">🔍 Live Backend Demo</div>
   <h1>RAG Document Q&A</h1>
-  <p>Paste any document and ask questions. Answers grounded in your content with source citations — no hallucination.</p>
-  <div class="pills"><span class="pill">LangChain</span><span class="pill">ChromaDB</span><span class="pill">Claude</span><span class="pill">FastAPI</span><span class="pill">Python</span><span class="pill">React</span></div>
+  <p>Upload a real document. Ask real questions. Answers grounded in your content with source citations — powered by FastAPI + ChromaDB running on Render.</p>
+  <div class="pills"><span class="pill">LangChain</span><span class="pill">ChromaDB</span><span class="pill">Claude</span><span class="pill">FastAPI</span><span class="pill">Render.com</span></div>
 </div>
 <div class="main">
+
+  <!-- STATUS -->
+  <div id="status-bar" class="status-bar">
+    <div class="status-dot"></div>
+    <span id="status-text">Checking backend status...</span>
+  </div>
+
+  <!-- UPLOAD -->
   <div class="card">
-    <div class="card-title">🔍 Try It Live</div>
-    <div class="card-sub">Paste a document, ask a question, get a cited answer powered by Claude.</div>
+    <div style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:6px;">📁 Upload Document</div>
+    <div style="font-size:0.82rem;color:var(--muted);margin-bottom:14px;">Upload a PDF, DOCX, or TXT file — it gets chunked, embedded, and stored in ChromaDB on the backend.</div>
     <div class="field">
-      <label>Document (paste any text)</label>
-      <textarea id="doc">MAS Technology Risk Management Guidelines (2021) require all financial institutions in Singapore to implement robust cybersecurity controls. Key requirements: multi-factor authentication for all privileged access, annual penetration testing by qualified third parties, real-time monitoring of critical systems, incident response plans tested at least once per year, and audit logs retained for a minimum of 5 years. Institutions handling customer data must implement data loss prevention tools and encrypt sensitive data both at rest and in transit. Non-compliance may result in fines up to SGD 1 million per breach. Financial institutions must also maintain a Technology Risk Management framework reviewed by the Board annually.</textarea>
+      <label>Select File (PDF / DOCX / TXT)</label>
+      <input type="file" id="file-input" accept=".pdf,.docx,.doc,.txt" style="border:1px solid var(--border);border-radius:8px;padding:8px 12px;width:100%;background:#fff;font-size:0.82rem;">
     </div>
+    <button class="btn btn-upload" onclick="uploadDoc()" id="upload-btn">📁 Upload &amp; Ingest Document</button>
+    <div class="thinking" id="upload-thinking"><div class="dots"><span></span><span></span><span></span></div>Chunking, embedding, storing in ChromaDB...</div>
+    <div class="doc-list" id="doc-list"></div>
+  </div>
+
+  <!-- CHAT -->
+  <div class="card">
+    <div style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:6px;">🔍 Ask a Question</div>
+    <div style="font-size:0.82rem;color:var(--muted);margin-bottom:14px;">The backend retrieves relevant chunks from ChromaDB and generates a cited answer.</div>
     <div class="field">
       <label>Your Question</label>
-      <input type="text" id="q" value="What are the audit log requirements and penalties for non-compliance?">
+      <input type="text" id="q" value="What are the key requirements and penalties for non-compliance?">
     </div>
-    <button class="btn" onclick="run()" id="btn">🔍 Ask Question</button>
-    <div class="thinking" id="thinking"><div class="dots"><span></span><span></span><span></span></div>Retrieving chunks and generating grounded answer...</div>
+    <button class="btn" onclick="askQuestion()" id="ask-btn">🔍 Ask Question</button>
+    <div class="thinking" id="ask-thinking"><div class="dots"><span></span><span></span><span></span></div>Retrieving from ChromaDB and generating answer...</div>
     <div class="result" id="result">
-      <div class="r-hdr">✓ Answer with Source Citations</div>
+      <div class="r-hdr" id="r-hdr">✓ Answer with Source Citations</div>
       <div class="r-body" id="answer"></div>
       <div class="sources" id="sources"></div>
     </div>
   </div>
-  <div class="card-title" style="margin-bottom:12px;">⚙️ How It Works</div>
+
+  <div style="font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:10px;">⚙️ How It Works</div>
   <div class="steps">
-    <div class="step"><div class="step-n">1</div><div class="step-t">Upload</div><div class="step-d">PDF/DOCX/TXT via PyMuPDF</div></div>
-    <div class="step"><div class="step-n">2</div><div class="step-t">Chunk</div><div class="step-d">500-char, 50 overlap</div></div>
-    <div class="step"><div class="step-n">3</div><div class="step-t">Embed</div><div class="step-d">all-MiniLM-L6-v2 free local</div></div>
-    <div class="step"><div class="step-n">4</div><div class="step-t">Store</div><div class="step-d">ChromaDB persistent vectors</div></div>
-    <div class="step"><div class="step-n">5</div><div class="step-t">Retrieve</div><div class="step-d">Top-4 by cosine similarity</div></div>
+    <div class="step"><div class="step-n">1</div><div class="step-t">Upload</div><div class="step-d">PDF/DOCX parsed by PyMuPDF</div></div>
+    <div class="step"><div class="step-n">2</div><div class="step-t">Chunk</div><div class="step-d">500 chars, 50 overlap</div></div>
+    <div class="step"><div class="step-n">3</div><div class="step-t">Embed</div><div class="step-d">all-MiniLM-L6-v2 local</div></div>
+    <div class="step"><div class="step-n">4</div><div class="step-t">Store</div><div class="step-d">ChromaDB on Render disk</div></div>
+    <div class="step"><div class="step-n">5</div><div class="step-t">Retrieve</div><div class="step-d">Top-4 cosine similarity</div></div>
     <div class="step"><div class="step-n">6</div><div class="step-t">Answer</div><div class="step-d">Claude grounded in chunks</div></div>
   </div>
-  <div class="card-title" style="margin-bottom:10px;">🏗️ Production Hosting (Free)</div>
+
+  <div style="font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:10px;">🏗️ Live Stack</div>
   <div class="arch">
-<span class="c-g">// SGD 0/month for portfolio scale</span>
-<span class="c-b">React Frontend</span>  <span class="c-m">→ GitHub Pages (static)</span>
-<span class="c-b">FastAPI + ChromaDB</span> <span class="c-m">→ Render.com free tier</span>
-<span class="c-a">POST /upload</span>    <span class="c-m">→ parse→chunk→embed→store</span>
-<span class="c-a">POST /chat</span>      <span class="c-m">→ retrieve→Claude→cited answer</span>
-<span class="c-b">Supabase</span>        <span class="c-m">→ PostgreSQL free tier (chat history)</span>
+<span class="c-g">// This demo calls the REAL backend — not simulated</span>
+<span class="c-b">This page</span>          <span class="c-m">→ GitHub Pages (static)</span>
+    <span class="c-m">↕ REST API</span>
+<span class="c-b">FastAPI + ChromaDB</span>  <span class="c-a">→ rag-document-qa-iqyx.onrender.com</span>
+<span class="c-b">sentence-transformers</span> <span class="c-m">→ runs inside Render container</span>
+<span class="c-b">Anthropic Claude</span>   <span class="c-m">→ LLM for answer generation</span>
   </div>
   <a href="https://github.com/kenrus777/rag-document-qa" target="_blank" class="gh-btn">🐙 View Full Source on GitHub</a>
 </div>
-<footer>Built by <a href="../../">kenrus777</a> · Singapore</footer>
+<footer>Built by <a href="../../">kenrus777</a> · Singapore · Backend: <a href="https://rag-document-qa-iqyx.onrender.com/docs" target="_blank">API Docs ↗</a></footer>
+
 <script>
-async function run(){
-  const doc=document.getElementById('doc').value.trim(), q=document.getElementById('q').value.trim();
-  if(!doc||!q)return;
-  const btn=document.getElementById('btn');
-  btn.disabled=true; btn.innerHTML='<div class="spinner"></div> Thinking...';
-  document.getElementById('thinking').classList.add('show');
-  document.getElementById('result').classList.remove('show');
-  try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:600,system:'You are a RAG document assistant. Answer ONLY from the provided context. Cite with [Source: "quote"]. After answer write SOURCES: then 3 short phrases from the doc you used.',messages:[{role:'user',content:`DOCUMENT:\n${doc}\n\nQUESTION: ${q}`}]})});
-    const data=await res.json();
-    const text=data.content?.[0]?.text||'';
-    const parts=text.split('SOURCES:');
-    document.getElementById('answer').textContent=parts[0].trim();
-    const srcs=(parts[1]||'').split('\n').map(s=>s.trim().replace(/^[-•*\d.]+\s*/,'')).filter(s=>s.length>4&&s.length<70);
-    document.getElementById('sources').innerHTML=srcs.slice(0,4).map(s=>`<span class="src">📎 ${s.substring(0,55)}...</span>`).join('');
-    document.getElementById('result').classList.add('show');
-  }catch(e){
-    document.getElementById('answer').textContent='Connect ANTHROPIC_API_KEY to see live response.\n\nFull RAG system (FastAPI+ChromaDB) runs on Render.com — see GitHub for deploy instructions.';
-    document.getElementById('result').classList.add('show');
+const API = 'https://rag-document-qa-iqyx.onrender.com';
+let uploadedDocs = [];
+
+// Check backend health on load
+async function checkHealth() {
+  const bar = document.getElementById('status-bar');
+  const txt = document.getElementById('status-text');
+  try {
+    const res = await fetch(API + '/health', { signal: AbortSignal.timeout(8000) });
+    if (res.ok) {
+      bar.className = 'status-bar';
+      txt.textContent = '✅ Backend online — rag-document-qa-iqyx.onrender.com';
+      loadDocs();
+    } else { throw new Error('not ok'); }
+  } catch(e) {
+    bar.className = 'status-bar error';
+    txt.textContent = '⚠ Backend waking up (Render free tier sleeps) — retry in 30s...';
+    setTimeout(checkHealth, 15000);
   }
-  document.getElementById('thinking').classList.remove('show');
-  btn.disabled=false; btn.innerHTML='🔍 Ask Question';
 }
+
+async function loadDocs() {
+  try {
+    const res = await fetch(API + '/documents');
+    const data = await res.json();
+    uploadedDocs = data.documents || [];
+    renderDocs();
+  } catch(e) {}
+}
+
+function renderDocs() {
+  const el = document.getElementById('doc-list');
+  if (!uploadedDocs.length) { el.innerHTML = '<div style="font-size:0.75rem;color:var(--muted);padding:6px 0;">No documents uploaded yet.</div>'; return; }
+  el.innerHTML = uploadedDocs.map(d => `
+    <div class="doc-item">
+      <span>📄 ${d.file_name}</span>
+      <button class="doc-del" onclick="deleteDoc('${d.doc_id}')">Delete</button>
+    </div>`).join('');
+}
+
+async function deleteDoc(docId) {
+  await fetch(API + '/documents/' + docId, { method: 'DELETE' });
+  uploadedDocs = uploadedDocs.filter(d => d.doc_id !== docId);
+  renderDocs();
+}
+
+async function uploadDoc() {
+  const file = document.getElementById('file-input').files[0];
+  if (!file) { alert('Please select a file first'); return; }
+  const btn = document.getElementById('upload-btn');
+  btn.disabled = true; btn.innerHTML = '<div class="spinner"></div> Processing...';
+  document.getElementById('upload-thinking').classList.add('show');
+  const fd = new FormData();
+  fd.append('file', file);
+  try {
+    const res = await fetch(API + '/upload', { method: 'POST', body: fd });
+    const data = await res.json();
+    if (res.ok) {
+      document.getElementById('status-text').textContent = `✅ Uploaded "${data.file_name}" — ${data.chunks} chunks created in ChromaDB`;
+      await loadDocs();
+    } else {
+      alert('Upload failed: ' + (data.detail || 'Unknown error'));
+    }
+  } catch(e) { alert('Upload error: ' + e.message); }
+  document.getElementById('upload-thinking').classList.remove('show');
+  btn.disabled = false; btn.innerHTML = '📁 Upload & Ingest Document';
+  document.getElementById('file-input').value = '';
+}
+
+async function askQuestion() {
+  const q = document.getElementById('q').value.trim();
+  if (!q) return;
+  if (!uploadedDocs.length) { alert('Please upload a document first'); return; }
+  const btn = document.getElementById('ask-btn');
+  btn.disabled = true; btn.innerHTML = '<div class="spinner"></div> Thinking...';
+  document.getElementById('ask-thinking').classList.add('show');
+  document.getElementById('result').classList.remove('show');
+  try {
+    const res = await fetch(API + '/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ question: q, doc_ids: null })
+    });
+    const data = await res.json();
+    if (res.ok) {
+      document.getElementById('answer').textContent = data.answer;
+      const src = data.sources || [];
+      document.getElementById('sources').innerHTML = src.map(s =>
+        `<span class="src">📎 ${s.file_name} ${s.page ? '· p.' + s.page : ''}</span>`
+      ).join('');
+      document.getElementById('r-hdr').textContent = `✓ Answer (${src.length} sources cited) · ${data.latency_ms}ms`;
+      document.getElementById('result').classList.add('show');
+    } else {
+      alert('Error: ' + (data.detail || 'Unknown error'));
+    }
+  } catch(e) { alert('Request failed: ' + e.message); }
+  document.getElementById('ask-thinking').classList.remove('show');
+  btn.disabled = false; btn.innerHTML = '🔍 Ask Question';
+}
+
+checkHealth();
 </script>
 </body>
 </html>

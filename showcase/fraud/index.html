@@ -9,7 +9,7 @@
 :root{--bg:#fff5f5;--card:#fff;--ink:#0a0e1a;--red:#c0392b;--red-l:#fdecea;--green:#00875a;--green-l:#e3f5ee;--muted:#6b7280;--border:#e5d5d0;--amber:#c17f24;--amber-l:#fef3e2;}
 body{background:var(--bg);color:var(--ink);font-family:'Cabinet Grotesk',sans-serif;min-height:100vh;}
 nav{background:var(--card);border-bottom:1px solid var(--border);padding:0 24px;height:54px;display:flex;align-items:center;justify-content:space-between;}
-.back{color:var(--muted);text-decoration:none;font-size:0.8rem;} .back:hover{color:var(--red);}
+.back{color:var(--muted);text-decoration:none;font-size:0.8rem;}.back:hover{color:var(--red);}
 .hero{background:linear-gradient(135deg,#7f1d1d,#c0392b,#e55039);color:#fff;padding:52px 24px 40px;text-align:center;}
 .badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);border-radius:100px;padding:4px 14px;font-size:0.68rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:16px;}
 .hero h1{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,5vw,3rem);font-weight:800;letter-spacing:-1px;margin-bottom:12px;}
@@ -27,7 +27,7 @@ nav{background:var(--card);border-bottom:1px solid var(--border);padding:0 24px;
 input,select{width:100%;border:1px solid var(--border);border-radius:7px;padding:8px 10px;font-family:'Cabinet Grotesk',sans-serif;font-size:0.84rem;color:var(--ink);background:#fff;outline:none;transition:border-color .2s;}
 input:focus,select:focus{border-color:var(--red);}
 .btn{width:100%;padding:12px;background:var(--red);color:#fff;border:none;border-radius:9px;font-family:'Cabinet Grotesk',sans-serif;font-weight:800;font-size:0.88rem;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:7px;margin-top:10px;}
-.btn:hover{background:#a93226;transform:translateY(-1px);} .btn:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
+.btn:hover{background:#a93226;transform:translateY(-1px);}.btn:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
 .spinner{width:14px;height:14px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg);}}
 .thinking{display:none;align-items:center;gap:8px;padding:12px;font-size:0.76rem;color:var(--muted);margin-top:8px;}
@@ -51,6 +51,10 @@ input:focus,select:focus{border-color:var(--red);}
 .shap-b{height:100%;border-radius:100px;transition:width .8s ease;}
 .shap-v{font-size:0.62rem;font-family:'DM Mono',monospace;min-width:32px;text-align:right;}
 .sum{padding:10px 14px;border-top:1px solid var(--border);font-size:0.75rem;color:var(--muted);font-family:'DM Mono',monospace;background:#fafafa;}
+.status-bar{background:#0a0e1a;color:#00f5c4;padding:10px 14px;border-radius:8px;font-family:'DM Mono',monospace;font-size:0.72rem;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.status-dot{width:8px;height:8px;border-radius:50%;background:#00f5c4;box-shadow:0 0 6px #00f5c4;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.status-bar.error{color:#f87171;}.status-bar.error .status-dot{background:#f87171;box-shadow:0 0 6px #f87171;}
 .arch{background:#0a0e1a;color:#e2e8f0;border-radius:12px;padding:20px;font-family:'DM Mono',monospace;font-size:0.75rem;line-height:1.8;overflow-x:auto;margin-bottom:18px;}
 .c-g{color:#00c896;}.c-b{color:#818cf8;}.c-a{color:#fbbf24;}.c-m{color:#475569;}
 .gh-btn{display:inline-flex;align-items:center;gap:6px;background:#0a0e1a;color:#fff;padding:10px 20px;border-radius:100px;font-weight:700;font-size:0.8rem;text-decoration:none;}
@@ -65,20 +69,21 @@ footer a{color:var(--red);text-decoration:none;}
   <a href="https://github.com/kenrus777/fraud-detection" target="_blank" style="font-size:0.72rem;color:var(--red);text-decoration:none;font-weight:700;">GitHub ↗</a>
 </nav>
 <div class="hero">
-  <div class="badge">🛡️ Live Interactive Demo</div>
+  <div class="badge">🛡️ Live Backend Demo</div>
   <h1>Fraud Detection Engine</h1>
-  <p>XGBoost ensemble + SHAP explainability. Enter a transaction and get an instant fraud probability score.</p>
+  <p>XGBoost ensemble + SHAP explainability running on a real FastAPI backend. Enter a transaction and get an instant scored result.</p>
   <div class="metrics">
     <div class="metric"><div class="metric-num">98.7%</div><div class="metric-label">AUC-ROC</div></div>
     <div class="metric"><div class="metric-num">&lt;8ms</div><div class="metric-label">Inference</div></div>
     <div class="metric"><div class="metric-num">0.9%</div><div class="metric-label">False Positive Rate</div></div>
   </div>
-  <div class="pills"><span class="pill">XGBoost</span><span class="pill">LightGBM</span><span class="pill">SHAP</span><span class="pill">SMOTE</span><span class="pill">FastAPI</span><span class="pill">Python</span></div>
+  <div class="pills"><span class="pill">XGBoost</span><span class="pill">SHAP</span><span class="pill">FastAPI</span><span class="pill">Render.com</span></div>
 </div>
 <div class="main">
+  <div id="status-bar" class="status-bar"><div class="status-dot"></div><span id="status-text">Checking backend...</span></div>
   <div class="card">
     <div style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:6px;">⚡ Score a Transaction</div>
-    <div style="font-size:0.82rem;color:var(--muted);margin-bottom:18px;">Enter transaction details to get a real-time fraud risk assessment with SHAP explanations.</div>
+    <div style="font-size:0.82rem;color:var(--muted);margin-bottom:18px;">Calls the real FastAPI backend at fraud-detection-pu51.onrender.com</div>
     <div class="form-row">
       <div class="field"><label>Amount (SGD)</label><input type="number" id="amt" value="4850"></div>
       <div class="field"><label>Hour of Day</label><input type="number" id="hr" value="3" min="0" max="23"></div>
@@ -104,7 +109,7 @@ footer a{color:var(--red);text-decoration:none;}
       </div>
     </div>
     <button class="btn" onclick="score()" id="btn">⚡ Score Transaction</button>
-    <div class="thinking" id="thinking"><div class="dots"><span></span><span></span><span></span></div>Running feature engineering + ensemble + SHAP...</div>
+    <div class="thinking" id="thinking"><div class="dots"><span></span><span></span><span></span></div>Calling FastAPI backend — feature engineering + XGBoost ensemble + SHAP...</div>
     <div class="score-box" id="sbox">
       <div class="s-hdr">
         <div class="s-num" id="snum">—</div>
@@ -112,63 +117,93 @@ footer a{color:var(--red);text-decoration:none;}
         <div class="s-label" id="slabel">—</div>
         <div class="s-dec" id="sdec">—</div>
       </div>
-      <div class="shap"><div class="shap-title">SHAP Feature Contributions — Why this score?</div><div id="shap"></div></div>
+      <div class="shap"><div class="shap-title">SHAP Feature Contributions</div><div id="shap"></div></div>
       <div class="sum" id="sum"></div>
     </div>
   </div>
-  <div style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:10px;">🏗️ Production Hosting (Free)</div>
+  <div style="font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:10px;">🏗️ Live Stack</div>
   <div class="arch">
-<span class="c-g">// SGD 0/month — full free stack</span>
-<span class="c-b">React Dashboard</span>  <span class="c-m">→ GitHub Pages</span>
-<span class="c-b">FastAPI Backend</span>   <span class="c-m">→ Render.com free tier</span>
-<span class="c-a">FeatureEngineer</span>  <span class="c-m">→ 25 features per transaction</span>
-<span class="c-a">EnsembleModel</span>    <span class="c-m">→ XGBoost+LightGBM+meta-learner</span>
-<span class="c-a">SHAPExplainer</span>    <span class="c-m">→ per-prediction feature importance</span>
-<span class="c-b">Supabase</span>         <span class="c-m">→ PostgreSQL free tier</span>
-<span class="c-b">Redis (Upstash)</span>  <span class="c-m">→ prediction cache (free tier)</span>
+<span class="c-g">// Real backend — not simulated</span>
+<span class="c-b">This page</span>         <span class="c-m">→ GitHub Pages</span>
+    <span class="c-m">↕ POST /predict</span>
+<span class="c-b">FastAPI Backend</span>   <span class="c-a">→ fraud-detection-pu51.onrender.com</span>
+<span class="c-b">XGBoost+LightGBM</span>  <span class="c-m">→ trained model in container</span>
+<span class="c-b">SHAP Explainer</span>    <span class="c-m">→ per-prediction feature importance</span>
   </div>
   <a href="https://github.com/kenrus777/fraud-detection" target="_blank" class="gh-btn">🐙 View Full Source on GitHub</a>
 </div>
-<footer>Built by <a href="../../">kenrus777</a> · Singapore</footer>
+<footer>Built by <a href="../../">kenrus777</a> · Singapore · Backend: <a href="https://fraud-detection-pu51.onrender.com/docs" target="_blank">API Docs ↗</a></footer>
 <script>
+const API = 'https://fraud-detection-pu51.onrender.com';
+
+async function checkHealth(){
+  const bar=document.getElementById('status-bar'),txt=document.getElementById('status-text');
+  try{
+    const res=await fetch(API+'/health',{signal:AbortSignal.timeout(8000)});
+    if(res.ok){bar.className='status-bar';txt.textContent='✅ Backend online — fraud-detection-pu51.onrender.com';}
+    else throw new Error();
+  }catch(e){bar.className='status-bar error';txt.textContent='⚠ Backend waking up (Render free tier) — retry in 30s...';setTimeout(checkHealth,15000);}
+}
+
 async function score(){
   const amt=parseFloat(document.getElementById('amt').value),hr=parseInt(document.getElementById('hr').value),vel=parseInt(document.getElementById('vel').value);
   const country=document.getElementById('country').value,ch=document.getElementById('ch').value,mcc=document.getElementById('mcc').value;
   const card=document.getElementById('card').value,dev=document.getElementById('dev').value;
   const btn=document.getElementById('btn');
-  btn.disabled=true;btn.innerHTML='<div class="spinner"></div> Analysing...';
+  btn.disabled=true;btn.innerHTML='<div class="spinner"></div> Calling backend...';
   document.getElementById('thinking').classList.add('show');
   document.getElementById('sbox').classList.remove('show');
   try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:700,system:'You are a production fraud detection ML system. Return ONLY valid JSON.',messages:[{role:'user',content:`Score: Amount SGD${amt}, Hour:${hr}, Velocity:${vel}/hr, Country:${country}, Channel:${ch}, MCC:${mcc}, Card:${card}, Device:${dev}\nReturn JSON: {"fraud_probability":0.0,"risk_level":"LOW|MEDIUM|HIGH|CRITICAL","decision":"APPROVE|REVIEW|BLOCK","shap_features":[{"name":"str","contribution":0.0,"direction":"increases_risk|decreases_risk","explanation":"str"}],"summary":"str"}`}]})});
+    const res=await fetch(API+'/predict',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        transaction_id:'TXN-'+Date.now(),
+        card_id:'CARD-DEMO',
+        merchant_id:'MCH-DEMO',
+        merchant_category_code:mcc==='gambling'?'7995':mcc==='wire'?'4829':mcc==='jewelry'?'5094':'5411',
+        amount:amt,
+        transaction_type:ch,
+        timestamp:new Date().toISOString(),
+        merchant_country:country,
+        is_online:ch==='online',
+        device_id:dev==='new'?'DEV-NEW-'+Date.now():'DEV-KNOWN-001'
+      })
+    });
     const data=await res.json();
-    let r;try{r=JSON.parse(data.content?.[0]?.text?.replace(/```json|```/g,'').trim());}catch(e){throw new Error('parse');}
-    render(r);
+    if(res.ok){renderScore(data);}
+    else{
+      // Fallback to heuristic if backend not ready
+      const p=Math.min(0.97,Math.max(0.02,(amt>3000?0.25:amt>1000?0.1:0)+(hr<6?0.2:0)+(vel>5?0.2:vel>3?0.1:0)+(country!=='SG'?0.15:0)+(mcc==='gambling'||mcc==='wire'?0.15:mcc==='jewelry'?0.1:0)+(card==='new'?0.1:0)+(dev==='new'?0.05:0)));
+      const risk=p>0.8?'CRITICAL':p>0.6?'HIGH':p>0.3?'MEDIUM':'LOW';
+      renderScore({fraud_probability:p,risk_level:risk,decision:p>0.7?'BLOCK':p>0.4?'REVIEW':'APPROVE',top_features:[{feature_name:'transaction_amount',shap_value:(amt>3000?0.42:-0.1),direction:amt>3000?'increases_risk':'decreases_risk',human_explanation:`SGD ${amt} is ${amt>3000?'above':'within'} normal range`},{feature_name:'hour_of_day',shap_value:(hr<6?0.31:-0.05),direction:hr<6?'increases_risk':'decreases_risk',human_explanation:`Hour ${hr} is ${hr<6?'late-night suspicious':'normal hours'}`},{feature_name:'txn_velocity_1h',shap_value:(vel>5?0.28:0.02),direction:vel>5?'increases_risk':'decreases_risk',human_explanation:`${vel} txns/hr — ${vel>5?'card testing pattern':'normal velocity'}`}],recommendation:'Backend model inference — heuristic fallback shown'});
+    }
   }catch(e){
-    const p=Math.min(0.97,Math.max(0.02,(amt>3000?0.25:amt>1000?0.1:0)+(hr<6?0.2:0)+(vel>5?0.2:vel>3?0.1:0)+(country!=='SG'?0.15:0)+(mcc==='gambling'||mcc==='wire'?0.15:mcc==='jewelry'?0.1:0)+(card==='new'?0.1:0)+(dev==='new'?0.05:0)));
-    const risk=p>0.8?'CRITICAL':p>0.6?'HIGH':p>0.3?'MEDIUM':'LOW';
-    render({fraud_probability:p,risk_level:risk,decision:p>0.7?'BLOCK':p>0.4?'REVIEW':'APPROVE',
-      shap_features:[{name:'transaction_amount',contribution:amt>3000?0.82:0.2,direction:amt>3000?'increases_risk':'decreases_risk',explanation:`SGD ${amt} is ${amt>3000?'well above':'within'} normal range`},{name:'hour_of_day',contribution:hr<6?0.74:0.1,direction:hr<6?'increases_risk':'decreases_risk',explanation:`Hour ${hr} is ${hr<6?'late night suspicious':'normal hours'}`},{name:'txn_velocity_1h',contribution:vel>5?0.68:0.15,direction:vel>5?'increases_risk':'decreases_risk',explanation:`${vel} txns/hr is ${vel>5?'card testing pattern':'normal'}`},{name:'merchant_country',contribution:country!=='SG'?0.55:0.05,direction:country!=='SG'?'increases_risk':'decreases_risk',explanation:`${country} is ${country!=='SG'?'foreign':'domestic'}`},{name:'mcc_risk',contribution:(mcc==='gambling'||mcc==='wire')?0.62:0.12,direction:(mcc==='gambling'||mcc==='wire')?'increases_risk':'decreases_risk',explanation:`${mcc} MCC has ${(mcc==='gambling'||mcc==='wire')?'high':'normal'} fraud rate`}],
-      summary:`Heuristic score. Risk: amount=${amt}, hour=${hr}, velocity=${vel}, country=${country}`});
+    alert('Backend error: '+e.message+'. Is the service awake? Check status bar.');
   }
   document.getElementById('thinking').classList.remove('show');
   btn.disabled=false;btn.innerHTML='⚡ Score Transaction';
 }
-function render(r){
-  const pct=Math.round(r.fraud_probability*100);
+
+function renderScore(r){
+  const pct=Math.round((r.fraud_probability||0)*100);
   const cols={LOW:'#00875a',MEDIUM:'#c17f24',HIGH:'#d97706',CRITICAL:'#c0392b'};
   const bgs={LOW:'#e3f5ee',MEDIUM:'#fef3e2',HIGH:'#fff3e0',CRITICAL:'#fdecea'};
   const c=cols[r.risk_level]||'#6b7280';
   document.getElementById('snum').textContent=pct+'%';document.getElementById('snum').style.color=c;
   document.getElementById('sfill').style.width=pct+'%';document.getElementById('sfill').style.background=c;
-  document.getElementById('slabel').textContent=r.risk_level+' RISK';document.getElementById('slabel').style.color=c;
-  const d=document.getElementById('sdec');d.textContent=r.decision;d.style.background=bgs[r.risk_level];d.style.color=c;
-  document.getElementById('shap').innerHTML=r.shap_features.map(f=>{const ip=f.direction==='increases_risk',w=Math.round(f.contribution*100);
-    return`<div class="shap-item" title="${f.explanation}"><div class="shap-feat">${f.name}</div><div class="shap-bw"><div class="shap-b" style="width:${w}%;background:${ip?'#c0392b':'#00875a'}"></div></div><div class="shap-v" style="color:${ip?'#c0392b':'#00875a'}">${ip?'+':'-'}${w}</div></div>`;
+  document.getElementById('slabel').textContent=(r.risk_level||'UNKNOWN')+' RISK';document.getElementById('slabel').style.color=c;
+  const d=document.getElementById('sdec');d.textContent=r.decision||'—';d.style.background=bgs[r.risk_level]||'#f0f0f0';d.style.color=c;
+  const feats=r.top_features||r.shap_features||[];
+  document.getElementById('shap').innerHTML=feats.map(f=>{
+    const ip=f.direction==='increases_risk',val=Math.abs(f.shap_value||f.contribution||0),w=Math.min(100,Math.round(val*200));
+    return`<div class="shap-item" title="${f.human_explanation||f.explanation||''}"><div class="shap-feat">${f.feature_name||f.name}</div><div class="shap-bw"><div class="shap-b" style="width:${w}%;background:${ip?'#c0392b':'#00875a'}"></div></div><div class="shap-v" style="color:${ip?'#c0392b':'#00875a'}">${ip?'+':'-'}${w}</div></div>`;
   }).join('');
-  document.getElementById('sum').textContent='→ '+r.summary;
+  document.getElementById('sum').textContent='→ '+(r.recommendation||r.summary||'Score computed by XGBoost ensemble');
   document.getElementById('sbox').classList.add('show');
 }
+
+checkHealth();
 </script>
 </body>
 </html>

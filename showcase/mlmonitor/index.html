@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>ML Model Monitor — kenrus777</title>
+<title>ML Monitor — kenrus777</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@700;800&family=Cabinet+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{--bg:#fffbf0;--card:#fff;--ink:#0a0e1a;--amber:#c17f24;--amber-l:#fef3e2;--green:#00875a;--green-l:#e3f5ee;--red:#c0392b;--red-l:#fdecea;--muted:#6b7280;--border:#e8dfc8;}
 body{background:var(--bg);color:var(--ink);font-family:'Cabinet Grotesk',sans-serif;min-height:100vh;}
 nav{background:var(--card);border-bottom:1px solid var(--border);padding:0 24px;height:54px;display:flex;align-items:center;justify-content:space-between;}
-.back{color:var(--muted);text-decoration:none;font-size:0.8rem;} .back:hover{color:var(--amber);}
+.back{color:var(--muted);text-decoration:none;font-size:0.8rem;}.back:hover{color:var(--amber);}
 .hero{background:linear-gradient(135deg,#78350f,#c17f24,#d97706);color:#fff;padding:52px 24px 40px;text-align:center;}
 .badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);border-radius:100px;padding:4px 14px;font-size:0.68rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:16px;}
 .hero h1{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,5vw,3rem);font-weight:800;letter-spacing:-1px;margin-bottom:12px;}
@@ -28,7 +28,7 @@ nav{background:var(--card);border-bottom:1px solid var(--border);padding:0 24px;
 input,select{width:100%;border:1px solid var(--border);border-radius:7px;padding:8px 10px;font-family:'Cabinet Grotesk',sans-serif;font-size:0.84rem;color:var(--ink);background:#fff;outline:none;transition:border-color .2s;}
 input:focus,select:focus{border-color:var(--amber);}
 .btn{width:100%;padding:12px;background:var(--amber);color:#fff;border:none;border-radius:9px;font-family:'Cabinet Grotesk',sans-serif;font-weight:800;font-size:0.88rem;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:7px;margin-top:10px;}
-.btn:hover{background:#a56718;transform:translateY(-1px);} .btn:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
+.btn:hover{background:#a56718;transform:translateY(-1px);}.btn:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
 .spinner{width:14px;height:14px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg);}}
 .thinking{display:none;align-items:center;gap:8px;padding:12px;font-size:0.76rem;color:var(--muted);margin-top:8px;}
@@ -39,18 +39,22 @@ input:focus,select:focus{border-color:var(--amber);}
 .result{display:none;margin-top:14px;}
 .result.show{display:block;}
 .r-hdr{padding:10px 14px;font-size:0.68rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;border-radius:8px 8px 0 0;border:1px solid var(--border);border-bottom:none;}
-.hdr-w{background:var(--amber-l);color:var(--amber);}
-.hdr-ok{background:var(--green-l);color:var(--green);}
-.hdr-c{background:var(--red-l);color:var(--red);}
+.hdr-w{background:var(--amber-l);color:var(--amber);}.hdr-ok{background:var(--green-l);color:var(--green);}.hdr-c{background:var(--red-l);color:var(--red);}
 .dt{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--border);border-radius:0 0 8px 8px;overflow:hidden;}
 .dt th{text-align:left;padding:9px 12px;font-size:0.6rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);border-bottom:2px solid var(--border);background:#fafafa;}
 .dt td{padding:9px 12px;border-bottom:1px solid var(--border);font-size:0.78rem;}
 .dt tr:last-child td{border-bottom:none;}
 .psi-pill{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:100px;font-size:0.6rem;font-weight:700;font-family:'DM Mono',monospace;}
-.p-ok{background:var(--green-l);color:var(--green);}
-.p-w{background:var(--amber-l);color:var(--amber);}
-.p-c{background:var(--red-l);color:var(--red);}
+.p-ok{background:var(--green-l);color:var(--green);}.p-w{background:var(--amber-l);color:var(--amber);}.p-c{background:var(--red-l);color:var(--red);}
 .rec{background:#fafafa;border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-top:12px;font-size:0.82rem;line-height:1.6;}
+.status-bar{background:#0a0e1a;color:#00f5c4;padding:10px 14px;border-radius:8px;font-family:'DM Mono',monospace;font-size:0.72rem;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.status-dot{width:8px;height:8px;border-radius:50%;background:#00f5c4;box-shadow:0 0 6px #00f5c4;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.status-bar.error{color:#f87171;}.status-bar.error .status-dot{background:#f87171;box-shadow:0 0 6px #f87171;}
+.summary-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-bottom:18px;}
+.sc{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center;}
+.sc-val{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:700;}
+.sc-lbl{font-size:0.6rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-top:3px;}
 .arch{background:#0a0e1a;color:#e2e8f0;border-radius:12px;padding:20px;font-family:'DM Mono',monospace;font-size:0.75rem;line-height:1.8;overflow-x:auto;margin-bottom:18px;}
 .c-g{color:#00c896;}.c-b{color:#818cf8;}.c-a{color:#fbbf24;}.c-m{color:#475569;}
 .gh-btn{display:inline-flex;align-items:center;gap:6px;background:#0a0e1a;color:#fff;padding:10px 20px;border-radius:100px;font-weight:700;font-size:0.8rem;text-decoration:none;}
@@ -65,101 +69,136 @@ footer a{color:var(--amber);text-decoration:none;}
   <a href="https://github.com/kenrus777/ml-monitoring" target="_blank" style="font-size:0.72rem;color:var(--amber);text-decoration:none;font-weight:700;">GitHub ↗</a>
 </nav>
 <div class="hero">
-  <div class="badge">📊 Live Interactive Demo</div>
+  <div class="badge">📊 Live Backend Demo</div>
   <h1>ML Model Monitor</h1>
-  <p>Run a drift analysis — PSI per feature, KS statistics, and a specific retraining recommendation.</p>
-  <div class="pills"><span class="pill">Evidently AI</span><span class="pill">PSI</span><span class="pill">KS Test</span><span class="pill">FastAPI</span><span class="pill">React</span><span class="pill">WebSocket</span></div>
+  <p>Real PSI drift reports from a live FastAPI backend. Dashboard summary, feature-level drift, and retraining recommendations.</p>
+  <div class="pills"><span class="pill">Evidently AI</span><span class="pill">PSI</span><span class="pill">FastAPI</span><span class="pill">Render.com</span><span class="pill">WebSocket</span></div>
 </div>
 <div class="main">
-  <div style="font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:10px;">📏 PSI Thresholds</div>
+  <div id="status-bar" class="status-bar"><div class="status-dot"></div><span id="status-text">Checking backend...</span></div>
+
+  <div style="font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:700;margin-bottom:10px;">📏 PSI Thresholds</div>
   <div class="thresh">
     <div class="th"><div class="th-val" style="color:var(--green)">PSI &lt;0.1</div><div class="th-l">🟢 Stable<br>No action</div></div>
     <div class="th"><div class="th-val" style="color:var(--amber)">PSI 0.1–0.2</div><div class="th-l">🟡 Warning<br>Monitor</div></div>
     <div class="th"><div class="th-val" style="color:var(--red)">PSI &gt;0.2</div><div class="th-l">🔴 Drift<br>Retrain</div></div>
   </div>
+
+  <!-- LIVE SUMMARY -->
   <div class="card">
-    <div style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:6px;">📊 Run Drift Analysis</div>
-    <div style="font-size:0.82rem;color:var(--muted);margin-bottom:18px;">Configure your scenario to generate a realistic PSI drift report with retraining recommendation.</div>
+    <div style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:6px;">📊 Live Dashboard Summary</div>
+    <div style="font-size:0.82rem;color:var(--muted);margin-bottom:14px;">Fetched live from ml-monitoring.onrender.com/summary</div>
+    <button class="btn" onclick="loadSummary()" id="sum-btn" style="margin-top:0;margin-bottom:12px;">🔄 Load Live Summary</button>
+    <div class="thinking" id="sum-thinking"><div class="dots"><span></span><span></span><span></span></div>Fetching from backend...</div>
+    <div id="summary-cards" class="summary-cards" style="display:none;"></div>
+  </div>
+
+  <!-- DRIFT REPORT -->
+  <div class="card">
+    <div style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:6px;">🔬 Live Drift Report</div>
+    <div style="font-size:0.82rem;color:var(--muted);margin-bottom:14px;">Calls GET /drift/report on the real backend — PSI + KS test per feature.</div>
     <div class="form-row">
-      <div class="field"><label>Model Type</label>
-        <select id="model"><option value="fraud">Fraud Detection (XGBoost)</option><option value="credit">Credit Scoring (LightGBM)</option><option value="churn">Customer Churn (RF)</option><option value="price">Price Prediction (XGBoost)</option></select>
+      <div class="field"><label>Lookback Days</label>
+        <select id="days"><option value="3">Last 3 days</option><option value="7" selected>Last 7 days</option><option value="14">Last 14 days</option><option value="30">Last 30 days</option></select>
       </div>
-      <div class="field"><label>Production Scenario</label>
-        <select id="scenario"><option value="blackfriday">Black Friday — transaction spike</option><option value="recession">Economic downturn</option><option value="newproduct">New payment method launched</option><option value="stable">Stable normal operations</option></select>
+      <div class="field" style="display:flex;align-items:flex-end;">
+        <button class="btn" onclick="loadDrift()" id="drift-btn" style="margin-top:0;">📊 Fetch Drift Report</button>
       </div>
     </div>
-    <div class="form-row three">
-      <div class="field"><label>Days Since Deploy</label><input type="number" id="days" value="45" min="1" max="365"></div>
-      <div class="field"><label>AUC at Deploy</label><input type="number" id="auc_b" value="0.987" step="0.001" min="0.5" max="1.0"></div>
-      <div class="field"><label>Current AUC</label><input type="number" id="auc_n" value="0.961" step="0.001" min="0.5" max="1.0"></div>
-    </div>
-    <button class="btn" onclick="runDrift()" id="btn">📊 Generate Drift Report</button>
-    <div class="thinking" id="thinking"><div class="dots"><span></span><span></span><span></span></div>Computing PSI, KS statistics, Jensen-Shannon divergence...</div>
+    <div class="thinking" id="drift-thinking"><div class="dots"><span></span><span></span><span></span></div>Computing PSI and KS statistics on backend...</div>
     <div class="result" id="result">
       <div class="r-hdr" id="rhdr">Drift Report</div>
       <table class="dt"><thead><tr><th>Feature</th><th>PSI</th><th>KS p-val</th><th>Status</th><th>Mean Δ</th></tr></thead><tbody id="tbody"></tbody></table>
       <div class="rec" id="rec"></div>
     </div>
   </div>
-  <div style="font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:10px;">🏗️ Production Hosting (Free)</div>
+
+  <div style="font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:10px;">🏗️ Live Stack</div>
   <div class="arch">
-<span class="c-g">// SGD 0/month</span>
-<span class="c-b">React Dashboard</span>   <span class="c-m">→ GitHub Pages</span>
-<span class="c-b">FastAPI Backend</span>    <span class="c-m">→ Render.com free tier</span>
-<span class="c-a">DriftDetector</span>    <span class="c-m">→ PSI+KS+JS per feature</span>
-<span class="c-a">PerformanceTracker</span> <span class="c-m">→ rolling AUC/F1, delayed labels</span>
-<span class="c-a">WS /ws/live</span>      <span class="c-m">→ real-time prediction stream</span>
-<span class="c-b">Parquet files</span>     <span class="c-m">→ reference + production data</span>
+<span class="c-g">// Real backend — not simulated</span>
+<span class="c-b">This page</span>          <span class="c-m">→ GitHub Pages</span>
+    <span class="c-m">↕ REST API</span>
+<span class="c-b">FastAPI Backend</span>     <span class="c-a">→ ml-monitoring.onrender.com</span>
+<span class="c-b">GET /summary</span>        <span class="c-m">→ dashboard KPIs</span>
+<span class="c-b">GET /drift/report</span>   <span class="c-m">→ PSI+KS per feature</span>
+<span class="c-b">GET /alerts</span>         <span class="c-m">→ active threshold alerts</span>
+<span class="c-b">WS /ws/live</span>         <span class="c-m">→ real-time prediction stream</span>
   </div>
   <a href="https://github.com/kenrus777/ml-monitoring" target="_blank" class="gh-btn">🐙 View Full Source on GitHub</a>
 </div>
-<footer>Built by <a href="../../">kenrus777</a> · Singapore</footer>
+<footer>Built by <a href="../../">kenrus777</a> · Singapore · Backend: <a href="https://ml-monitoring.onrender.com/docs" target="_blank">API Docs ↗</a></footer>
 <script>
-async function runDrift(){
-  const model=document.getElementById('model').value,scenario=document.getElementById('scenario').value;
-  const days=document.getElementById('days').value,ab=parseFloat(document.getElementById('auc_b').value),an=parseFloat(document.getElementById('auc_n').value);
-  const drop=(ab-an).toFixed(3);
-  const btn=document.getElementById('btn');
-  btn.disabled=true;btn.innerHTML='<div class="spinner"></div> Computing...';
-  document.getElementById('thinking').classList.add('show');
+const API = 'https://ml-monitoring.onrender.com';
+
+async function checkHealth(){
+  const bar=document.getElementById('status-bar'),txt=document.getElementById('status-text');
+  try{
+    const res=await fetch(API+'/health',{signal:AbortSignal.timeout(8000)});
+    if(res.ok){bar.className='status-bar';txt.textContent='✅ Backend online — ml-monitoring.onrender.com';}
+    else throw new Error();
+  }catch(e){bar.className='status-bar error';txt.textContent='⚠ Backend waking up (Render free tier) — retry in 30s...';setTimeout(checkHealth,15000);}
+}
+
+async function loadSummary(){
+  const btn=document.getElementById('sum-btn');
+  btn.disabled=true;btn.innerHTML='<div class="spinner"></div> Loading...';
+  document.getElementById('sum-thinking').classList.add('show');
+  document.getElementById('summary-cards').style.display='none';
+  try{
+    const res=await fetch(API+'/summary');
+    const d=await res.json();
+    const cards=document.getElementById('summary-cards');
+    const statusColor={healthy:'var(--green)',warning:'var(--amber)',degraded:'var(--red)'};
+    const driftColor={stable:'var(--green)',warning:'var(--amber)',drift:'#f97316',critical:'var(--red)'};
+    cards.innerHTML=[
+      {label:'Model Status',val:(d.model_status||'—').toUpperCase(),color:statusColor[d.model_status]||'var(--muted)'},
+      {label:'Drift Status',val:(d.drift_status||'—').toUpperCase(),color:driftColor[d.drift_status]||'var(--muted)'},
+      {label:'AUC-ROC 7d',val:d.auc_7d?d.auc_7d.toFixed(3):'—',color:'var(--green)'},
+      {label:'Active Alerts',val:d.active_alerts??'—',color:d.active_alerts>0?'var(--red)':'var(--green)'},
+      {label:'Predictions',val:d.predictions_today?.toLocaleString()||'—',color:'var(--amber)'},
+      {label:'P99 Latency',val:d.p99_latency_ms?d.p99_latency_ms.toFixed(1)+'ms':'—',color:'var(--amber)'},
+      {label:'Days Since Retrain',val:d.days_since_retrain??'—',color:d.days_since_retrain>30?'var(--red)':'var(--green)'},
+      {label:'Drifted Features',val:d.drifted_features??'—',color:d.drifted_features>2?'var(--red)':d.drifted_features>0?'var(--amber)':'var(--green)'},
+    ].map(c=>`<div class="sc"><div class="sc-val" style="color:${c.color}">${c.val}</div><div class="sc-lbl">${c.label}</div></div>`).join('');
+    cards.style.display='grid';
+  }catch(e){alert('Error loading summary: '+e.message);}
+  document.getElementById('sum-thinking').classList.remove('show');
+  btn.disabled=false;btn.innerHTML='🔄 Load Live Summary';
+}
+
+async function loadDrift(){
+  const days=document.getElementById('days').value;
+  const btn=document.getElementById('drift-btn');
+  btn.disabled=true;btn.innerHTML='<div class="spinner"></div> Fetching...';
+  document.getElementById('drift-thinking').classList.add('show');
   document.getElementById('result').classList.remove('show');
   try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:600,system:'You are a production ML monitoring system. Return ONLY valid JSON.',messages:[{role:'user',content:`Drift report for: Model=${model}, Scenario=${scenario}, Days=${days}, AUC drop=${drop}\nReturn JSON: {"features":[{"name":"str","psi":0.000,"ks_pval":0.000,"status":"stable|warning|critical","mean_delta":"+X.X%"}],"overall":"stable|warning|critical","retrain":true,"recommendation":"2-3 sentences"}`}]})});
-    const data=await res.json();
-    let r;try{r=JSON.parse(data.content?.[0]?.text?.replace(/```json|```/g,'').trim());}catch(e){throw new Error('parse');}
-    renderReport(r,drop,days);
-  }catch(e){
-    const isDrift=parseFloat(drop)>0.015||scenario==='blackfriday'||scenario==='recession';
-    renderReport({
-      features:[
-        {name:'transaction_amount',psi:isDrift?0.241:0.042,ks_pval:isDrift?0.012:0.312,status:isDrift?'critical':'stable',mean_delta:isDrift?'+34.2%':'+2.1%'},
-        {name:'txn_velocity_1h',psi:isDrift?0.187:0.038,ks_pval:isDrift?0.028:0.445,status:isDrift?'warning':'stable',mean_delta:isDrift?'+18.7%':'+0.8%'},
-        {name:'is_online',psi:isDrift?0.156:0.021,ks_pval:isDrift?0.041:0.521,status:isDrift?'warning':'stable',mean_delta:isDrift?'+22.4%':'+1.2%'},
-        {name:'merchant_country',psi:0.098,ks_pval:0.083,status:'stable',mean_delta:'+4.1%'},
-        {name:'hour_of_day',psi:0.044,ks_pval:0.212,status:'stable',mean_delta:'-1.2%'},
-        {name:'card_age_days',psi:0.021,ks_pval:0.445,status:'stable',mean_delta:'+0.8%'},
-      ],
-      overall:isDrift?'warning':'stable',
-      retrain:isDrift,
-      recommendation:isDrift?`${Math.ceil(parseFloat(drop)*100)}% AUC drop over ${days} days. transaction_amount PSI=0.241 exceeds retrain threshold. Schedule retraining with data from last 45 days using updated SMOTE ratios.`:`Model stable after ${days} days. All PSIs below 0.1. AUC drop of ${drop} within acceptable range. Continue weekly monitoring.`
-    },drop,days);
-  }
-  document.getElementById('thinking').classList.remove('show');
-  btn.disabled=false;btn.innerHTML='📊 Generate Drift Report';
+    const res=await fetch(`${API}/drift/report?days=${days}`);
+    const d=await res.json();
+    renderReport(d);
+  }catch(e){alert('Error: '+e.message);}
+  document.getElementById('drift-thinking').classList.remove('show');
+  btn.disabled=false;btn.innerHTML='📊 Fetch Drift Report';
 }
-function renderReport(r,drop,days){
-  document.getElementById('tbody').innerHTML=r.features.map(f=>{
+
+function renderReport(d){
+  const tbody=document.getElementById('tbody');
+  tbody.innerHTML=(d.features||[]).map(f=>{
     const cls=f.psi>0.2?'p-c':f.psi>0.1?'p-w':'p-ok';
     const icon=f.psi>0.2?'🔴':f.psi>0.1?'🟡':'🟢';
-    const dc=f.mean_delta.startsWith('+')&&parseFloat(f.mean_delta)>5?'color:var(--red)':f.mean_delta.startsWith('-')?'color:var(--green)':'';
-    return`<tr><td style="font-family:'DM Mono',monospace;font-size:0.72rem;">${f.name}</td><td><span class="psi-pill ${cls}">${f.psi.toFixed(3)}</span></td><td style="font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--muted);">${f.ks_pval.toFixed(3)}</td><td style="font-size:0.76rem;">${icon} ${f.status}</td><td style="font-family:'DM Mono',monospace;font-size:0.7rem;${dc}">${f.mean_delta}</td></tr>`;
+    const dc=f.mean_shift_pct&&f.mean_shift_pct>5?'color:var(--red)':f.mean_shift_pct&&f.mean_shift_pct<-5?'color:var(--green)':'';
+    const delta=f.mean_shift_pct?`${f.mean_shift_pct>0?'+':''}${f.mean_shift_pct.toFixed(1)}%`:'—';
+    return`<tr><td style="font-family:'DM Mono',monospace;font-size:0.72rem;">${f.feature_name}</td><td><span class="psi-pill ${cls}">${(f.psi||0).toFixed(3)}</span></td><td style="font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--muted);">${(f.ks_pvalue||0).toFixed(3)}</td><td style="font-size:0.76rem;">${icon} ${f.drift_status}</td><td style="font-family:'DM Mono',monospace;font-size:0.7rem;${dc}">${delta}</td></tr>`;
   }).join('');
   const hdr=document.getElementById('rhdr');
-  hdr.textContent=r.retrain?'⚠ Drift Detected — Retraining Recommended':'✓ Model Stable — No Immediate Action';
-  hdr.className='r-hdr '+(r.overall==='critical'?'hdr-c':r.overall==='warning'?'hdr-w':'hdr-ok');
-  document.getElementById('rec').innerHTML=`<strong>Recommendation:</strong> ${r.recommendation}<br><small style="font-family:'DM Mono',monospace;color:var(--muted);">AUC drop: ${drop} · Days deployed: ${days} · Status: ${r.overall?.toUpperCase()}</small>`;
+  const retrain=d.overall_drift_status==='critical'||d.drifted_feature_count>=3;
+  hdr.textContent=retrain?`⚠ ${d.drifted_feature_count} Features Drifted — Retraining Recommended`:`✓ Model Stable — ${d.drifted_feature_count} features drifted of ${d.total_feature_count}`;
+  hdr.className='r-hdr '+(d.overall_drift_status==='critical'?'hdr-c':d.overall_drift_status==='warning'||retrain?'hdr-w':'hdr-ok');
+  document.getElementById('rec').innerHTML=`<strong>Summary:</strong> ${d.summary||'—'}<br><small style="font-family:'DM Mono',monospace;color:var(--muted);">Sample size: ${d.sample_size} · Reference: ${d.reference_size} · Status: ${(d.overall_drift_status||'').toUpperCase()}</small>`;
   document.getElementById('result').classList.add('show');
 }
+
+checkHealth();
 </script>
 </body>
 </html>
